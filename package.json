@@ -1,0 +1,25 @@
+{
+  "name": "pokemon-sherbet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roohit2/pokemon-ice-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Roohit2/pokemon-ice-site/issues"
+  },
+  "homepage": "https://github.com/Roohit2/pokemon-ice-site#readme",
+  "dependencies": {
+    "axios": "^1.18.0",
+    "cheerio": "^1.2.0"
+  }
+}

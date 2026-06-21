@@ -22,8 +22,24 @@ function displayPokemon(pokemonList) {
     card.className = "card";
 
     card.innerHTML = `
-      <h2>${pokemon.name}</h2>
-    `;
+  <h2>${pokemon.name}</h2>
+
+  <p>
+    ${pokemon.types.join(" / ")}
+  </p>
+
+  <p>
+    HP:${pokemon.stats.hp}
+    A:${pokemon.stats.atk}
+    B:${pokemon.stats.def}
+  </p>
+
+  <p>
+    C:${pokemon.stats.spa}
+    D:${pokemon.stats.spd}
+    S:${pokemon.stats.spe}
+  </p>
+`;
 
     card.onclick = () => showPokemon(pokemon);
 
@@ -36,21 +52,33 @@ function showPokemon(pokemon) {
   const result = document.getElementById("result");
 
   result.innerHTML = `
-  
+
     <div class="result-box">
 
       <h2>${pokemon.name}</h2>
 
-      <h3>上から倒せる相手</h3>
+      <p>
+        タイプ：
+        ${pokemon.types.join(" / ")}
+      </p>
+
+      <h3>種族値</h3>
+
+      <table>
+
+        <tr><td>HP</td><td>${pokemon.stats.hp}</td></tr>
+        <tr><td>A</td><td>${pokemon.stats.atk}</td></tr>
+        <tr><td>B</td><td>${pokemon.stats.def}</td></tr>
+        <tr><td>C</td><td>${pokemon.stats.spa}</td></tr>
+        <tr><td>D</td><td>${pokemon.stats.spd}</td></tr>
+        <tr><td>S</td><td>${pokemon.stats.spe}</td></tr>
+
+      </table>
+
+      <h3>特性</h3>
 
       <ul>
-        ${pokemon.topKills.map(x => `<li>${x}</li>`).join("")}
-      </ul>
-
-      <h3>後出し可能</h3>
-
-      <ul>
-        ${pokemon.switchIn.map(x => `<li>${x}</li>`).join("")}
+        ${pokemon.abilities.map(a => `<li>${a}</li>`).join("")}
       </ul>
 
     </div>

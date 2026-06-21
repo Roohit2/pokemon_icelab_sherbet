@@ -1,12 +1,17 @@
 body {
-  background: #0f1117;
-  color: white;
-  font-family: sans-serif;
-  padding: 20px;
-}
+  background:
+    linear-gradient(to bottom,
+      #08111f,
+      #123456,
+      #dff6ff);
 
-h1 {
-  color: #7dd3fc;
+  min-height: 100vh;
+
+  color: white;
+
+  font-family: sans-serif;
+
+  padding: 20px;
 }
 
 #search {
@@ -36,4 +41,32 @@ h1 {
   background: #1f2937;
   padding: 20px;
   border-radius: 12px;
+}
+
+.hero-title {
+
+  font-size: 4rem;
+
+  text-align: center;
+
+  color: #d8f3ff;
+
+  text-shadow:
+    0 0 10px #8be9fd,
+    0 0 20px #8be9fd,
+    0 0 40px #8be9fd;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  border-bottom: 1px solid #374151;
+  padding: 8px;
+}
+
+h3 {
+  color: #7dd3fc;
 }

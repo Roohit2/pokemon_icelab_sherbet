@@ -1,24 +1,237 @@
 [
   {
-    "name": "パオジアン",
-    "topKills": [
-      "ドラパルト",
-      "ガブリアス",
-      "ラティオス"
+    "id": 38,
+    "name": "アローラキュウコン",
+    "types": [
+      "こおり",
+      "フェアリー"
     ],
-    "switchIn": [
-      "ランドロス",
-      "カイリュー"
-    ]
+    "stats": {
+      "hp": 73,
+      "atk": 67,
+      "def": 75,
+      "spa": 81,
+      "spd": 100,
+      "spe": 109
+    },
+    "abilities": [
+      "ゆきがくれ",
+      "ゆきふらし"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
   },
-
   {
-    "name": "マニューラ",
-    "topKills": [
-      "サザンドラ"
+    "id": 351,
+    "name": "ポワルン(ゆきぐものすがた)",
+    "types": [
+      "こおり"
     ],
-    "switchIn": [
-      "ボーマンダ"
-    ]
+    "stats": {
+      "hp": 70,
+      "atk": 70,
+      "def": 70,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    },
+    "abilities": [
+      "てんきや"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "id": 362,
+    "name": "オニゴーリ",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 80,
+      "atk": 80,
+      "def": 80,
+      "spa": 80,
+      "spd": 80,
+      "spe": 80
+    },
+    "abilities": [
+      "せいしんりょく",
+      "アイスボディ",
+      "ムラっけ"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "id": 3621,
+    "name": "メガオニゴーリ",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 80,
+      "spa": 120,
+      "spd": 80,
+      "spe": 100
+    },
+    "abilities": [
+      "フリーズスキン"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "id": 460,
+    "name": "ユキノオー",
+    "types": [
+      "くさ",
+      "こおり"
+    ],
+    "stats": {
+      "hp": 90,
+      "atk": 92,
+      "def": 75,
+      "spa": 92,
+      "spd": 85,
+      "spe": 60
+    },
+    "abilities": [
+      "ゆきふらし",
+      "ぼうおん"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "id": 4601,
+    "name": "メガユキノオー",
+    "types": [
+      "くさ",
+      "こおり"
+    ],
+    "stats": {
+      "hp": 90,
+      "atk": 132,
+      "def": 105,
+      "spa": 132,
+      "spd": 105,
+      "spe": 30
+    },
+    "abilities": [
+      "ゆきふらし"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "id": 461,
+    "name": "マニューラ",
+    "types": [
+      "あく",
+      "こおり"
+    ],
+    "stats": {
+      "hp": 70,
+      "atk": 120,
+      "def": 65,
+      "spa": 45,
+      "spd": 85,
+      "spe": 125
+    },
+    "abilities": [
+      "プレッシャー",
+      "わるいてぐせ"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "id": 471,
+    "name": "グレイシア",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 65,
+      "atk": 60,
+      "def": 110,
+      "spa": 130,
+      "spd": 95,
+      "spe": 65
+    },
+    "abilities": [
+      "ゆきがくれ",
+      "アイスボディ"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "id": 473,
+    "name": "マンムー",
+    "types": [
+      "こおり",
+      "じめん"
+    ],
+    "stats": {
+      "hp": 110,
+      "atk": 130,
+      "def": 80,
+      "spa": 70,
+      "spd": 60,
+      "spe": 80
+    },
+    "abilities": [
+      "どんかん",
+      "ゆきがくれ",
+      "あついしぼう"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "id": 478,
+    "name": "ユキメノコ",
+    "types": [
+      "こおり",
+      "ゴースト"
+    ],
+    "stats": {
+      "hp": 70,
+      "atk": 80,
+      "def": 70,
+      "spa": 80,
+      "spd": 70,
+      "spe": 110
+    },
+    "abilities": [
+      "ゆきがくれ",
+      "のろわれボディ"
+    ],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
   }
 ]
