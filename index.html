@@ -24,9 +24,25 @@
       氷タイプポケモンの対面性能、後出し性能、
       環境トップへの有利不利を分析するデータベース
     </p>
+
+    <hr class="ice-divider">
+
   </div>
 
-  <input id="search" placeholder="ポケモン名で検索">
+  <!-- <input id="search" placeholder="ポケモン名で検索"> -->
+
+  <div class="filter-buttons">
+
+    <button onclick="sortByHp()"> HP順 </button>
+    <button onclick="sortByAtk()"> 攻撃順 </button>
+    <button onclick="sortByDefense()"> 防御順 </button>
+    <button onclick="sortBySpAtk()"> 特攻順 </button>
+    <button onclick="sortBySpDefense()"> 特防順 </button>
+    <button onclick="sortBySpeed()"> 素早さ順 </button>
+    <button onclick="showMegaOnly()"> メガシンカのみ </button>
+    <button onclick="displayPokemon(allPokemon)"> 全表示 </button>
+
+  </div>
 
   <div id="pokemon-list"></div>
 

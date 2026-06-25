@@ -1,4 +1,5 @@
 let allPokemon = [];
+let selectedPokemon = null;
 
 async function loadPokemon() {
 
@@ -10,7 +11,6 @@ async function loadPokemon() {
 }
 
 function displayPokemon(pokemonList) {
-
   const list = document.getElementById("pokemon-list");
 
   list.innerHTML = "";
@@ -22,24 +22,30 @@ function displayPokemon(pokemonList) {
     card.className = "card";
 
     card.innerHTML = `
+
+  <img
+    src="${pokemon.image}"
+    width="100"
+  >
+
   <h2>${pokemon.name}</h2>
 
-  <p>
-    ${pokemon.types.join(" / ")}
-  </p>
+          <p>
+            ${pokemon.types.join(" / ")}
+          </p>
 
-  <p>
-    HP:${pokemon.stats.hp}
-    A:${pokemon.stats.atk}
-    B:${pokemon.stats.def}
-  </p>
+          <p>
+            HP:${pokemon.stats.hp}
+            A:${pokemon.stats.atk}
+            B:${pokemon.stats.def}
+          </p>
 
-  <p>
-    C:${pokemon.stats.spa}
-    D:${pokemon.stats.spd}
-    S:${pokemon.stats.spe}
-  </p>
-`;
+          <p>
+            C:${pokemon.stats.spa}
+            D:${pokemon.stats.spd}
+            S:${pokemon.stats.spe}
+          </p>
+          `;
 
     card.onclick = () => showPokemon(pokemon);
 
@@ -51,9 +57,26 @@ function showPokemon(pokemon) {
 
   const result = document.getElementById("result");
 
-  result.innerHTML = `
+  // 同じポケモンを再クリック
+  if (selectedPokemon === pokemon.name) {
 
+    result.innerHTML = "";
+
+    selectedPokemon = null;
+
+    return;
+  }
+
+  selectedPokemon = pokemon.name;
+
+  result.innerHTML = `
     <div class="result-box">
+
+      <img
+        src="${pokemon.image}"
+        class="pokemon-image"
+        alt="${pokemon.name}"
+      >
 
       <h2>${pokemon.name}</h2>
 
@@ -65,14 +88,12 @@ function showPokemon(pokemon) {
       <h3>種族値</h3>
 
       <table>
-
         <tr><td>HP</td><td>${pokemon.stats.hp}</td></tr>
         <tr><td>A</td><td>${pokemon.stats.atk}</td></tr>
         <tr><td>B</td><td>${pokemon.stats.def}</td></tr>
         <tr><td>C</td><td>${pokemon.stats.spa}</td></tr>
         <tr><td>D</td><td>${pokemon.stats.spd}</td></tr>
         <tr><td>S</td><td>${pokemon.stats.spe}</td></tr>
-
       </table>
 
       <h3>特性</h3>
@@ -85,16 +106,92 @@ function showPokemon(pokemon) {
   `;
 }
 
-document.getElementById("search")
-  .addEventListener("input", (e) => {
+// document.getElementById("search")
+//   .addEventListener("input", (e) => {
 
-    const keyword = e.target.value;
+//     const keyword = e.target.value;
 
-    const filtered = allPokemon.filter(p =>
-      p.name.includes(keyword)
+//     const filtered = allPokemon.filter(p =>
+//       p.name.includes(keyword)
+//     );
+
+//     displayPokemon(filtered);
+//   });
+
+function sortByHp() {
+
+  const sorted = [...allPokemon];
+
+  sorted.sort((a, b) =>
+    b.stats.hp - a.stats.hp
+  );
+
+  displayPokemon(sorted);
+}
+
+function sortByAtk() {
+
+  const sorted = [...allPokemon];
+
+  sorted.sort((a, b) =>
+    b.stats.atk - a.stats.atk
+  );
+
+  displayPokemon(sorted);
+}
+
+function sortByDefense() {
+
+  const sorted = [...allPokemon];
+
+  sorted.sort((a, b) =>
+    b.stats.def - a.stats.def
+  );
+
+  displayPokemon(sorted);
+}
+
+function sortBySpAtk() {
+
+  const sorted = [...allPokemon];
+
+  sorted.sort((a, b) =>
+    b.stats.spa - a.stats.spa
+  );
+
+  displayPokemon(sorted);
+}
+
+function sortBySpDefense() {
+
+  const sorted = [...allPokemon];
+
+  sorted.sort((a, b) =>
+    b.stats.spd - a.stats.spd
+  );
+
+  displayPokemon(sorted);
+}
+
+function sortBySpeed() {
+
+  const sorted = [...allPokemon];
+
+  sorted.sort((a, b) =>
+    b.stats.spe - a.stats.spe
+  );
+
+  displayPokemon(sorted);
+}
+
+function showMegaOnly() {
+
+  const filtered =
+    allPokemon.filter(p =>
+      p.name.includes("メガ")
     );
 
-    displayPokemon(filtered);
-  });
+  displayPokemon(filtered);
+}
 
 loadPokemon();
