@@ -1,5 +1,6 @@
 let allPokemon = [];
 let selectedPokemon = null;
+let selectedCard = null;
 
 async function loadPokemon() {
 
@@ -11,6 +12,7 @@ async function loadPokemon() {
 }
 
 function displayPokemon(pokemonList) {
+
   const list = document.getElementById("pokemon-list");
 
   list.innerHTML = "";
@@ -30,80 +32,143 @@ function displayPokemon(pokemonList) {
 
   <h2>${pokemon.name}</h2>
 
-          <p>
-            ${pokemon.types.join(" / ")}
-          </p>
+  <p class="category">
+    ${pokemon.category || ""}
+  </p>
 
-          <p>
-            HP:${pokemon.stats.hp}
-            A:${pokemon.stats.atk}
-            B:${pokemon.stats.def}
-          </p>
+<p class="type-container">
+  ${pokemon.types.map(type =>
+      `<span class="type type-${type}">
+      ${type}
+    </span>`
+    ).join(" ")}
+</p>
 
-          <p>
-            C:${pokemon.stats.spa}
-            D:${pokemon.stats.spd}
-            S:${pokemon.stats.spe}
-          </p>
-          `;
+<p class="rank-line">
+  HP:<span class="${getRankClass(pokemon.stats.hp)}">${getRank(pokemon.stats.hp)}</span>
+  攻:<span class="${getRankClass(pokemon.stats.atk)}">${getRank(pokemon.stats.atk)}</span>
+  防:<span class="${getRankClass(pokemon.stats.def)}">${getRank(pokemon.stats.def)}</span>
+  特攻:<span class="${getRankClass(pokemon.stats.spa)}">${getRank(pokemon.stats.spa)}</span>
+  特防:<span class="${getRankClass(pokemon.stats.spd)}">${getRank(pokemon.stats.spd)}</span>
+  素早:<span class="${getRankClass(pokemon.stats.spe)}">${getRank(pokemon.stats.spe)}</span>
+</p>
+    `;
 
-    card.onclick = () => showPokemon(pokemon);
+    card.onclick = () => showPokemon(pokemon, card);
 
     list.appendChild(card);
   });
 }
 
-function showPokemon(pokemon) {
+function showPokemon(pokemon, card) {
 
   const result = document.getElementById("result");
 
-  // 同じポケモンを再クリック
+  if (selectedCard) {
+    selectedCard.classList.remove("selected");
+  }
+
   if (selectedPokemon === pokemon.name) {
 
     result.innerHTML = "";
 
     selectedPokemon = null;
+    selectedCard = null;
 
     return;
   }
 
+  card.classList.add("selected");
+
+  selectedCard = card;
   selectedPokemon = pokemon.name;
 
   result.innerHTML = `
-    <div class="result-box">
+  <div class="result-box">
 
-      <img
-        src="${pokemon.image}"
-        class="pokemon-image"
-        alt="${pokemon.name}"
-      >
+        <img
+          src="${pokemon.image}"
+          class="pokemon-image"
+          alt="${pokemon.name}"
+        >
 
-      <h2>${pokemon.name}</h2>
+          <h2>${pokemon.name}</h2>
 
-      <p>
-        タイプ：
-        ${pokemon.types.join(" / ")}
-      </p>
+          <p>
+            タイプ：
+            ${pokemon.types.map(type =>
+    `<span class="type type-${type}">
+          ${type}
+        </span>`
 
-      <h3>種族値</h3>
+  ).join(" ")}
+          </p>
 
-      <table>
-        <tr><td>HP</td><td>${pokemon.stats.hp}</td></tr>
-        <tr><td>A</td><td>${pokemon.stats.atk}</td></tr>
-        <tr><td>B</td><td>${pokemon.stats.def}</td></tr>
-        <tr><td>C</td><td>${pokemon.stats.spa}</td></tr>
-        <tr><td>D</td><td>${pokemon.stats.spd}</td></tr>
-        <tr><td>S</td><td>${pokemon.stats.spe}</td></tr>
-      </table>
+          <h3>種族値</h3>
 
-      <h3>特性</h3>
+          <div>
 
-      <ul>
-        ${pokemon.abilities.map(a => `<li>${a}</li>`).join("")}
-      </ul>
+            HP ${pokemon.stats.hp}
+            <div class="stat-bar">
+              <div
+                class="stat-fill"
+                style="width:${pokemon.stats.hp / 255 * 100}%">
+              </div>
+            </div>
 
-    </div>
-  `;
+            A ${pokemon.stats.atk}
+            <div class="stat-bar">
+              <div
+                class="stat-fill"
+                style="width:${pokemon.stats.atk / 255 * 100}%">
+              </div>
+            </div>
+
+            B ${pokemon.stats.def}
+            <div class="stat-bar">
+              <div
+                class="stat-fill"
+                style="width:${pokemon.stats.def / 255 * 100}%">
+              </div>
+            </div>
+
+            C ${pokemon.stats.spa}
+            <div class="stat-bar">
+              <div
+                class="stat-fill"
+                style="width:${pokemon.stats.spa / 255 * 100}%">
+              </div>
+            </div>
+
+            D ${pokemon.stats.spd}
+            <div class="stat-bar">
+              <div
+                class="stat-fill"
+                style="width:${pokemon.stats.spd / 255 * 100}%">
+              </div>
+            </div>
+
+            S ${pokemon.stats.spe}
+            <div class="stat-bar">
+              <div
+                class="stat-fill"
+                style="width:${pokemon.stats.spe / 255 * 100}%">
+              </div>
+            </div>
+
+          </div>
+
+          <h3>特性</h3>
+
+          <ul>
+            ${pokemon.abilities.map(a => `<li>${a}</li>`).join("")}
+          </ul>
+
+        </div>
+    `;
+  result.scrollIntoView({
+    behavior: "smooth"
+  });
 }
 
 // document.getElementById("search")
@@ -195,3 +260,21 @@ function showMegaOnly() {
 }
 
 loadPokemon();
+
+function getRank(value) {
+  if (value >= 130) return "S";
+  if (value >= 100) return "A";
+  if (value >= 80) return "B";
+  if (value >= 50) return "C";
+  if (value >= 30) return "D";
+  return "E";
+}
+
+function getRankClass(value) {
+  if (value >= 130) return "rank-s";
+  if (value >= 100) return "rank-a";
+  if (value >= 80) return "rank-b";
+  if (value >= 50) return "rank-c";
+  if (value >= 30) return "rank-d";
+  return "rank-e";
+}
