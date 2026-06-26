@@ -1,19 +1,28 @@
-const axios = require("axios");
-const fs = require("fs");
+const puppeteer = require("puppeteer");
 
-async function main() {
+async function scrape() {
 
-  const url =
-    "https://gamewith.jp/pokemon-champions/553384";
+  const browser = await puppeteer.launch({
+    headless: false
+  });
 
-  const res = await axios.get(url);
+  const page = await browser.newPage();
 
-  fs.writeFileSync(
-    "glaceon.html",
-    res.data
+  await page.goto(
+    "https://gamewith.jp/pokemon-champions/553361",
+    {
+      waitUntil: "networkidle2"
+    }
   );
 
-  console.log("保存完了");
+  console.log(await page.title());
+
+  const html = await page.content();
+
+  console.log(html.length);
+
+  await browser.close();
+
 }
 
-main();
+scrape();
