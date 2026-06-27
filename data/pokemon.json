@@ -1,10 +1,16 @@
 [
   {
-    "id": 38,
-    "name": "アローラキュウコン",
+    "id": 3897,
+    "url": "https://yakkun.com/ch/zukan/n38a",
+    "no": "038",
+    "name": "キュウコン",
+    "category": "きつねポケモン",
+    "height": "1.1m",
+    "weight": "19.9kg",
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n38a.gif",
+    "imagePath": "images/n38a.png",
     "types": [
-      "こおり",
-      "フェアリー"
+      "こおり"
     ],
     "stats": {
       "hp": 73,
@@ -14,18 +20,23 @@
       "spd": 100,
       "spe": 109
     },
-    "abilities": [
-      "ゆきがくれ",
-      "ゆきふらし"
-    ],
+    "abilities": [],
+    "hiddenAbilities": [],
     "analysis": {
       "topKills": [],
       "switchIn": []
     }
   },
   {
-    "id": 351,
-    "name": "ポワルン(ゆきぐものすがた)",
+    "id": 351105,
+    "url": "https://yakkun.com/ch/zukan/n351i",
+    "no": "351",
+    "name": "ポワルン",
+    "category": "てんきポケモン",
+    "height": "0.3m",
+    "weight": "0.8kg",
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n351.gif",
+    "imagePath": "images/n351.png",
     "types": [
       "こおり"
     ],
@@ -37,9 +48,8 @@
       "spd": 70,
       "spe": 70
     },
-    "abilities": [
-      "てんきや"
-    ],
+    "abilities": [],
+    "hiddenAbilities": [],
     "analysis": {
       "topKills": [],
       "switchIn": []
@@ -60,14 +70,27 @@
       "spe": 80
     },
     "abilities": [
-      "せいしんりょく",
-      "アイスボディ",
-      "ムラっけ"
+      {
+        "name": "せいしんりょく",
+        "description": ""
+      },
+      {
+        "name": "アイスボディ",
+        "description": ""
+      }
     ],
     "analysis": {
       "topKills": [],
       "switchIn": []
-    }
+    },
+    "url": "https://yakkun.com/ch/zukan/n362",
+    "category": "がんめんポケモン",
+    "height": "1.5m",
+    "weight": "256.5kg",
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n362.gif",
+    "imagePath": "images/n362.png",
+    "no": "362"
   },
   {
     "id": 3621,
@@ -84,12 +107,23 @@
       "spe": 100
     },
     "abilities": [
-      "フリーズスキン"
+      {
+        "name": "フリーズスキン",
+        "description": ""
+      }
     ],
     "analysis": {
       "topKills": [],
       "switchIn": []
-    }
+    },
+    "url": "https://yakkun.com/ch/zukan/n362m",
+    "category": "がんめんポケモン",
+    "height": "2.1m",
+    "weight": "350.2kg",
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n362m.gif",
+    "imagePath": "images/n362m.png",
+    "no": "362"
   },
   {
     "id": 460,
@@ -107,13 +141,23 @@
       "spe": 60
     },
     "abilities": [
-      "ゆきふらし",
-      "ぼうおん"
+      {
+        "name": "ゆきふらし",
+        "description": ""
+      }
     ],
     "analysis": {
       "topKills": [],
       "switchIn": []
-    }
+    },
+    "url": "https://yakkun.com/ch/zukan/n460",
+    "category": "じゅひょうポケモン",
+    "height": "2.2m",
+    "weight": "135.5kg",
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n460.gif",
+    "imagePath": "images/n460.png",
+    "no": "460"
   },
   {
     "id": 4601,
@@ -131,12 +175,23 @@
       "spe": 30
     },
     "abilities": [
-      "ゆきふらし"
+      {
+        "name": "ゆきふらし",
+        "description": ""
+      }
     ],
     "analysis": {
       "topKills": [],
       "switchIn": []
-    }
+    },
+    "url": "https://yakkun.com/ch/zukan/n460m",
+    "category": "じゅひょうポケモン",
+    "height": "2.7m",
+    "weight": "185.0kg",
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n460m.gif",
+    "imagePath": "images/n460m.png",
+    "no": "460"
   },
   {
     "id": 461,
@@ -154,13 +209,23 @@
       "spe": 125
     },
     "abilities": [
-      "プレッシャー",
-      "わるいてぐせ"
+      {
+        "name": "プレッシャー",
+        "description": ""
+      }
     ],
     "analysis": {
       "topKills": [],
       "switchIn": []
-    }
+    },
+    "url": "https://yakkun.com/ch/zukan/n461",
+    "category": "かぎづめポケモン",
+    "height": "1.1m",
+    "weight": "34.0kg",
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n461.gif",
+    "imagePath": "images/n461.png",
+    "no": "461"
   },
   {
     "id": 471,
@@ -179,13 +244,22 @@
       "spe": 65
     },
     "abilities": [
-      "ゆきがくれ",
-      "アイスボディ"
+      {
+        "name": "ゆきがくれ",
+        "description": ""
+      }
     ],
     "analysis": {
       "topKills": [],
       "switchIn": []
-    }
+    },
+    "url": "https://yakkun.com/ch/zukan/n471",
+    "height": "0.8m",
+    "weight": "25.9kg",
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n471.gif",
+    "imagePath": "images/n471.png",
+    "no": "471"
   },
   {
     "id": 473,
@@ -203,14 +277,27 @@
       "spe": 80
     },
     "abilities": [
-      "どんかん",
-      "ゆきがくれ",
-      "あついしぼう"
+      {
+        "name": "どんかん",
+        "description": ""
+      },
+      {
+        "name": "ゆきがくれ",
+        "description": ""
+      }
     ],
     "analysis": {
       "topKills": [],
       "switchIn": []
-    }
+    },
+    "url": "https://yakkun.com/ch/zukan/n473",
+    "category": "ほんキバポケモン",
+    "height": "2.5m",
+    "weight": "291.0kg",
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n473.gif",
+    "imagePath": "images/n473.png",
+    "no": "473"
   },
   {
     "id": 478,
@@ -228,12 +315,302 @@
       "spe": 110
     },
     "abilities": [
-      "ゆきがくれ",
-      "のろわれボディ"
+      {
+        "name": "ゆきがくれ",
+        "description": ""
+      }
     ],
     "analysis": {
       "topKills": [],
       "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n478",
+    "category": "ゆきぐにポケモン",
+    "height": "1.3m",
+    "weight": "26.6kg",
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n478.gif",
+    "imagePath": "images/n478.png",
+    "no": "478"
+  },
+  {
+    "name": "メガユキメノコ",
+    "no": "478",
+    "category": "ゆきぐにポケモン",
+    "height": "2.6m",
+    "weight": "29.6kg",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 70,
+      "atk": 80,
+      "def": 70,
+      "spa": 140,
+      "spd": 100,
+      "spe": 120
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n478m.gif",
+    "imagePath": "images/n478m.png",
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n478m",
+    "id": 4781
+  },
+  {
+    "id": 479102,
+    "url": "https://yakkun.com/ch/zukan/n479f",
+    "no": "479",
+    "name": "ロトム",
+    "category": "プラズマポケモン",
+    "height": "0.3m",
+    "weight": "0.3kg",
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n479f.gif",
+    "imagePath": "images/n479f.png",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 107,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
     }
+  },
+  {
+    "name": "バイバニラ",
+    "no": "584",
+    "category": "ブリザードポケモン",
+    "height": "1.3m",
+    "weight": "57.5kg",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 71,
+      "atk": 95,
+      "def": 85,
+      "spa": 110,
+      "spd": 95,
+      "spe": 79
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n584.gif",
+    "imagePath": "images/n584.png",
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n584",
+    "id": 584
+  },
+  {
+    "name": "ツンベアー",
+    "no": "614",
+    "category": "とうけつポケモン",
+    "height": "2.6m",
+    "weight": "260.0kg",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 95,
+      "atk": 130,
+      "def": 80,
+      "spa": 70,
+      "spd": 80,
+      "spe": 50
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n614.gif",
+    "imagePath": "images/n614.png",
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n614",
+    "id": 614
+  },
+  {
+    "name": "アマルルガ",
+    "no": "699",
+    "category": "ツンドラポケモン",
+    "height": "2.7m",
+    "weight": "225.0kg",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 123,
+      "atk": 77,
+      "def": 72,
+      "spa": 99,
+      "spd": 92,
+      "spe": 58
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n699.gif",
+    "imagePath": "images/n699.png",
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n699",
+    "id": 699
+  },
+  {
+    "name": "クレベース",
+    "no": "713",
+    "category": "ひょうざんポケモン",
+    "height": "2.0m",
+    "weight": "505.0kg",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 95,
+      "atk": 117,
+      "def": 184,
+      "spa": 44,
+      "spd": 46,
+      "spe": 28
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n713h.gif",
+    "imagePath": "images/n713h.png",
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n713",
+    "id": 713
+  },
+  {
+    "id": 713104,
+    "url": "https://yakkun.com/ch/zukan/n713h",
+    "no": "713",
+    "name": "クレベース",
+    "category": "ひょうざんポケモン",
+    "height": "1.4m",
+    "weight": "262.4kg",
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n713h.gif",
+    "imagePath": "images/n713h.png",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 95,
+      "atk": 127,
+      "def": 184,
+      "spa": 34,
+      "spd": 36,
+      "spe": 38
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    }
+  },
+  {
+    "name": "ケケンカニ",
+    "no": "740",
+    "category": "けがにポケモン",
+    "height": "1.7m",
+    "weight": "180.0kg",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 97,
+      "atk": 132,
+      "def": 77,
+      "spa": 62,
+      "spd": 67,
+      "spe": 43
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n740.gif",
+    "imagePath": "images/n740.png",
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n740",
+    "id": 740
+  },
+  {
+    "name": "メガケケンカニ",
+    "no": "740",
+    "category": "けがにポケモン",
+    "height": "2.6m",
+    "weight": "252.8kg",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 97,
+      "atk": 157,
+      "def": 122,
+      "spa": 62,
+      "spd": 107,
+      "spe": 33
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n740m.gif",
+    "imagePath": "images/n740m.png",
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n740m",
+    "id": 7401
+  },
+  {
+    "name": "バリコオル",
+    "no": "866",
+    "category": "コメディアンポケモン",
+    "height": "1.5m",
+    "weight": "58.2kg",
+    "types": [
+      "こおり"
+    ],
+    "stats": {
+      "hp": 80,
+      "atk": 85,
+      "def": 75,
+      "spa": 110,
+      "spd": 100,
+      "spe": 70
+    },
+    "abilities": [],
+    "hiddenAbilities": [],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n866.gif",
+    "imagePath": "images/n866.png",
+    "analysis": {
+      "topKills": [],
+      "switchIn": []
+    },
+    "url": "https://yakkun.com/ch/zukan/n866",
+    "id": 866
   }
 ]

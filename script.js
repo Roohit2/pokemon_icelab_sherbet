@@ -21,7 +21,7 @@ const STAT_LIST = [
 // ==============================
 
 // JSONを読み込み、表示できるデータだけを一覧表示する
-fetch("./data/ice_pokemon_with_category.json?ver=1")
+fetch("./data/pokemon.json?ver=1")
   .then(response => response.json())
   .then(data => {
     allPokemon = data.filter(isValidPokemon);
@@ -248,7 +248,7 @@ function createMemoHtml(pokemon) {
 
 // ポケモンの画像パスを取得する
 function getImage(pokemon) {
-  return pokemon.imagePath || pokemon.image || "";
+  return pokemon.imageUrl || pokemon.imagePath || pokemon.image || "";
 }
 
 // 種族値を数値として取得する
