@@ -12,8 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const startButton =
     document.getElementById("game-start-button");
 
+  const leftButton =
+    document.getElementById("game-left-button");
+
+  const rightButton =
+    document.getElementById("game-right-button");
+
   const modal =
     document.getElementById("game-modal");
+
+  const gameWindow =
+    document.getElementById("game-window");
 
   const canvas =
     document.getElementById("game-canvas");
@@ -40,7 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
     !openButton ||
     !closeButton ||
     !startButton ||
+    !leftButton ||
+    !rightButton ||
     !modal ||
+    !gameWindow ||
     !canvas ||
     !scoreElement ||
     !comboElement ||
@@ -215,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function createExplosion(x, y) {
     const particles = [];
 
-    for (let index = 0; index < 18; index++) {
+    for (let index = 0; index < 20; index++) {
       const angle =
         Math.random() *
         Math.PI *
@@ -224,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const speed =
         2 +
         Math.random() *
-        4;
+        4.5;
 
       particles.push({
         x,
@@ -241,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
         radius:
           3 +
           Math.random() *
-          6,
+          7,
 
         life: 1,
 
@@ -274,9 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
         particleIndex--
       ) {
         const particle =
-          explosion.particles[
-          particleIndex
-          ];
+          explosion.particles[particleIndex];
 
         particle.x += particle.speedX;
         particle.y += particle.speedY;
@@ -298,9 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      if (
-        explosion.particles.length === 0
-      ) {
+      if (explosion.particles.length === 0) {
         explosions.splice(
           explosionIndex,
           1
@@ -311,60 +319,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function drawExplosions() {
     explosions.forEach(explosion => {
-      explosion.particles.forEach(
-        particle => {
-          ctx.save();
+      explosion.particles.forEach(particle => {
+        ctx.save();
 
-          ctx.globalAlpha =
-            particle.life;
+        ctx.globalAlpha = particle.life;
 
-          const gradient =
-            ctx.createRadialGradient(
-              particle.x,
-              particle.y,
-              0,
-              particle.x,
-              particle.y,
-              particle.radius
-            );
-
-          gradient.addColorStop(
-            0,
-            "#ffffff"
-          );
-
-          gradient.addColorStop(
-            0.35,
-            "#bae6fd"
-          );
-
-          gradient.addColorStop(
-            0.7,
-            "#38bdf8"
-          );
-
-          gradient.addColorStop(
-            1,
-            "rgba(14, 165, 233, 0)"
-          );
-
-          ctx.fillStyle = gradient;
-
-          ctx.beginPath();
-
-          ctx.arc(
+        const gradient =
+          ctx.createRadialGradient(
             particle.x,
             particle.y,
-            particle.radius,
             0,
-            Math.PI * 2
+            particle.x,
+            particle.y,
+            particle.radius
           );
 
-          ctx.fill();
+        gradient.addColorStop(
+          0,
+          "#ffffff"
+        );
 
-          ctx.restore();
-        }
-      );
+        gradient.addColorStop(
+          0.35,
+          "#bae6fd"
+        );
+
+        gradient.addColorStop(
+          0.7,
+          "#38bdf8"
+        );
+
+        gradient.addColorStop(
+          1,
+          "rgba(14, 165, 233, 0)"
+        );
+
+        ctx.fillStyle = gradient;
+
+        ctx.beginPath();
+
+        ctx.arc(
+          particle.x,
+          particle.y,
+          particle.radius,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fill();
+
+        ctx.restore();
+      });
     });
   }
 
@@ -433,11 +438,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setGarchomp();
 
+    if (statusArea) {
+      statusArea.classList.remove("danger");
+    }
+
     updateAttackDisplay();
     updateStatus();
 
     messageElement.textContent =
-      "Spaceでこおりのつぶてを発射！";
+      "攻撃を当ててスコアを稼げ！";
 
     startButton.disabled = true;
     startButton.textContent = "ゲーム中";
@@ -509,14 +518,16 @@ document.addEventListener("DOMContentLoaded", () => {
       moveDisplay.classList.add(
         "ice-beam"
       );
-    } else {
-      moveDisplay.textContent =
-        "❄ こおりのつぶて";
 
-      moveDisplay.classList.remove(
-        "ice-beam"
-      );
+      return;
     }
+
+    moveDisplay.textContent =
+      "❄ こおりのつぶて";
+
+    moveDisplay.classList.remove(
+      "ice-beam"
+    );
   }
 
   // ==============================
@@ -536,13 +547,19 @@ document.addEventListener("DOMContentLoaded", () => {
     animationId = null;
   }
 
+  function releaseMovementButtons() {
+    keys.left = false;
+    keys.right = false;
+
+    leftButton.classList.remove("pressed");
+    rightButton.classList.remove("pressed");
+  }
+
   function stopGame() {
     gameRunning = false;
 
     stopAnimationAndTimer();
-
-    keys.left = false;
-    keys.right = false;
+    releaseMovementButtons();
 
     startButton.disabled = false;
     startButton.textContent = "ゲーム開始";
@@ -552,9 +569,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gameRunning = false;
 
     stopAnimationAndTimer();
-
-    keys.left = false;
-    keys.right = false;
+    releaseMovementButtons();
 
     startButton.disabled = false;
     startButton.textContent = "もう一度遊ぶ";
@@ -574,7 +589,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==============================
-  // キーボード操作
+  // PCキーボード操作
   // ==============================
 
   window.addEventListener("keydown", event => {
@@ -621,7 +636,165 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==============================
-  // 攻撃
+  // スマホ左右ボタン
+  // ==============================
+
+  function startMobileMove(
+    direction,
+    button,
+    event
+  ) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!gameRunning) {
+      return;
+    }
+
+    if (direction === "left") {
+      keys.left = true;
+    }
+
+    if (direction === "right") {
+      keys.right = true;
+    }
+
+    button.classList.add("pressed");
+
+    if (button.setPointerCapture) {
+      button.setPointerCapture(
+        event.pointerId
+      );
+    }
+  }
+
+  function stopMobileMove(
+    direction,
+    button,
+    event
+  ) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    if (direction === "left") {
+      keys.left = false;
+    }
+
+    if (direction === "right") {
+      keys.right = false;
+    }
+
+    button.classList.remove("pressed");
+  }
+
+  leftButton.addEventListener(
+    "pointerdown",
+    event => {
+      startMobileMove(
+        "left",
+        leftButton,
+        event
+      );
+    }
+  );
+
+  leftButton.addEventListener(
+    "pointerup",
+    event => {
+      stopMobileMove(
+        "left",
+        leftButton,
+        event
+      );
+    }
+  );
+
+  leftButton.addEventListener(
+    "pointercancel",
+    event => {
+      stopMobileMove(
+        "left",
+        leftButton,
+        event
+      );
+    }
+  );
+
+  rightButton.addEventListener(
+    "pointerdown",
+    event => {
+      startMobileMove(
+        "right",
+        rightButton,
+        event
+      );
+    }
+  );
+
+  rightButton.addEventListener(
+    "pointerup",
+    event => {
+      stopMobileMove(
+        "right",
+        rightButton,
+        event
+      );
+    }
+  );
+
+  rightButton.addEventListener(
+    "pointercancel",
+    event => {
+      stopMobileMove(
+        "right",
+        rightButton,
+        event
+      );
+    }
+  );
+
+  window.addEventListener(
+    "pointerup",
+    releaseMovementButtons
+  );
+
+  window.addEventListener(
+    "pointercancel",
+    releaseMovementButtons
+  );
+
+  // ==============================
+  // スマホ画面タップで発射
+  // ==============================
+
+  gameWindow.addEventListener(
+    "pointerdown",
+    event => {
+      if (!gameRunning) {
+        return;
+      }
+
+      if (
+        event.pointerType !== "touch" &&
+        event.pointerType !== "pen"
+      ) {
+        return;
+      }
+
+      if (event.target.closest("button")) {
+        return;
+      }
+
+      event.preventDefault();
+
+      shootAttack();
+    }
+  );
+
+  // ==============================
+  // 攻撃発射
   // ==============================
 
   function shootAttack() {
@@ -702,11 +875,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==============================
 
   function updatePlayer() {
-    if (keys.left) {
+    if (keys.left && !keys.right) {
       player.x -= player.speed;
     }
 
-    if (keys.right) {
+    if (keys.right && !keys.left) {
       player.x += player.speed;
     }
 
@@ -757,6 +930,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ==============================
   // 敵移動
+  // 横方向のみ
   // ==============================
 
   function updateEnemy() {
@@ -850,7 +1024,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     combo += 1;
 
-    attacks.splice(attackIndex, 1);
+    attacks.splice(
+      attackIndex,
+      1
+    );
 
     updateStatus();
 
@@ -891,15 +1068,19 @@ document.addEventListener("DOMContentLoaded", () => {
       marginY;
 
     if (attack.type === "iceBeam") {
-      const attackLeft = attack.x;
+      const attackLeft =
+        attack.x;
 
       const attackRight =
-        attack.x + attack.width;
+        attack.x +
+        attack.width;
 
-      const attackTop = attack.y;
+      const attackTop =
+        attack.y;
 
       const attackBottom =
-        attack.y + attack.height;
+        attack.y +
+        attack.height;
 
       return (
         attackLeft < targetRight &&
@@ -926,10 +1107,12 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     const distanceX =
-      attack.x - nearestX;
+      attack.x -
+      nearestX;
 
     const distanceY =
-      attack.y - nearestY;
+      attack.y -
+      nearestY;
 
     return (
       distanceX * distanceX +
@@ -1288,9 +1471,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "rgba(255, 255, 255, 0.9)";
 
     ctx.fillRect(
-      beam.x + beam.width * 0.4,
+      beam.x +
+      beam.width * 0.4,
+
       beam.y,
+
       beam.width * 0.2,
+
       beam.height
     );
 

@@ -33,9 +33,13 @@
   background: #0b1c32;
 
   border: 2px solid #7dd3fc;
+
   box-shadow:
     0 0 30px rgba(125, 211, 252, 0.25),
     0 24px 80px rgba(0, 0, 0, 0.65);
+
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* ==============================
@@ -76,10 +80,16 @@
 
   color: #ffffff;
   font-size: 1.7rem;
+  line-height: 1;
 
   background: #18324f;
   border: 1px solid #7dd3fc;
+
   cursor: pointer;
+}
+
+.game-close-button:hover {
+  background: #23486d;
 }
 
 /* ==============================
@@ -130,6 +140,8 @@
 
   width: 100%;
 
+  overflow: hidden;
+
   background: #071426;
   border: 2px solid #7dd3fc;
 }
@@ -142,6 +154,51 @@
   aspect-ratio: 4 / 5;
 
   touch-action: none;
+}
+
+/* ==============================
+   スマホ左右操作
+============================== */
+
+.mobile-game-controls {
+  display: none;
+  grid-template-columns: 74px 1fr 74px;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 10px;
+}
+
+.mobile-game-controls p {
+  margin: 0;
+
+  color: #bae6fd;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.mobile-move-button {
+  height: 52px;
+  padding: 0;
+
+  color: #ffffff;
+  font-size: 1.45rem;
+  font-weight: 800;
+
+  background: #17476b;
+  border: 2px solid #7dd3fc;
+
+  touch-action: none;
+  cursor: pointer;
+}
+
+.mobile-move-button:active,
+.mobile-move-button.pressed {
+  color: #062034;
+
+  background: #bae6fd;
+
+  transform: translateY(1px);
 }
 
 /* ==============================
@@ -178,8 +235,8 @@
   padding: 9px 12px;
 
   color: #ffffff;
-  font-weight: 700;
   font-size: 0.95rem;
+  font-weight: 700;
 
   background: #17476b;
   border: 1px solid #7dd3fc;
@@ -203,7 +260,7 @@
 }
 
 /* ==============================
-   操作
+   操作説明・開始ボタン
 ============================== */
 
 .game-controls {
@@ -230,19 +287,44 @@
   padding: 10px 15px;
 
   color: #062034;
-  font-weight: 800;
   font-size: 0.95rem;
+  font-weight: 800;
 
   background: #7dd3fc;
   border: 2px solid #e0f7ff;
+
   cursor: pointer;
+}
+
+.game-start-button:hover {
+  background: #bae6fd;
 }
 
 .game-start-button:disabled {
   color: #a5b4c2;
+
   background: #31506b;
   border-color: #496982;
+
   cursor: default;
+}
+
+/* ==============================
+   タッチ端末
+============================== */
+
+@media (pointer: coarse) {
+  .mobile-game-controls {
+    display: grid;
+  }
+
+  .pc-game-guide {
+    display: none;
+  }
+
+  .game-controls {
+    justify-content: center;
+  }
 }
 
 /* ==============================
@@ -262,17 +344,36 @@
     border: 0;
   }
 
+  .game-window-header {
+    margin-bottom: 8px;
+  }
+
   .game-window-header h2 {
     font-size: 1.1rem;
   }
 
-  .game-controls {
-    flex-direction: column;
-    align-items: stretch;
+  .game-window-header p {
+    font-size: 0.76rem;
   }
 
-  .game-controls p {
-    text-align: center;
+  .game-status {
+    margin-bottom: 7px;
+  }
+
+  .game-status span {
+    padding: 5px 3px;
+  }
+
+  .mobile-game-controls {
+    display: grid;
+  }
+
+  .pc-game-guide {
+    display: none;
+  }
+
+  .game-controls {
+    justify-content: center;
   }
 
   .game-start-button {

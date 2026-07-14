@@ -86,14 +86,16 @@
   </main>
 
   <div id="game-modal" class="game-modal" aria-hidden="true">
-    <div class="game-window">
+    <div id="game-window" class="game-window">
 
       <div class="game-window-header">
         <div>
-          <h2>SHERBET 雪合戦</h2>
+          <h2>
+            SHERBET 雪合戦
+          </h2>
 
           <p>
-            左右に移動して攻撃を当てろ！
+            攻撃を当ててスコアを稼げ！
           </p>
         </div>
 
@@ -123,6 +125,20 @@
         <canvas id="game-canvas" width="480" height="600"></canvas>
       </div>
 
+      <div class="mobile-game-controls">
+        <button type="button" id="game-left-button" class="mobile-move-button" aria-label="左へ移動">
+          ◀
+        </button>
+
+        <p>
+          画面タップで発射
+        </p>
+
+        <button type="button" id="game-right-button" class="mobile-move-button" aria-label="右へ移動">
+          ▶
+        </button>
+      </div>
+
       <div class="game-message-area">
         <p id="game-message">
           「ゲーム開始」を押してください。
@@ -136,7 +152,7 @@
       </div>
 
       <div class="game-controls">
-        <p>
+        <p class="pc-game-guide">
           移動：← →
           <br>
           発射：Space
