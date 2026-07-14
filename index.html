@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Sherbet</title>
@@ -11,6 +12,10 @@
   <link rel="stylesheet" href="card.css">
   <link rel="stylesheet" href="detail.css">
   <link rel="stylesheet" href="moves.css">
+  <link rel="stylesheet" href="game.css">
+
+  <script src="script.js" defer></script>
+  <script src="game.js" defer></script>
 </head>
 
 <body>
@@ -66,6 +71,10 @@
         <button type="button" onclick="showAllPokemon()">
           ❄️ 全表示
         </button>
+
+        <button type="button" id="open-game-button">
+          🎮 ミニゲーム
+        </button>
       </div>
 
     </div>
@@ -76,7 +85,70 @@
     <div id="result"></div>
   </main>
 
-  <script src="script.js"></script>
+  <div id="game-modal" class="game-modal" aria-hidden="true">
+    <div class="game-window">
+
+      <div class="game-window-header">
+        <div>
+          <h2>SHERBET 雪合戦</h2>
+
+          <p>
+            左右に移動して攻撃を当てろ！
+          </p>
+        </div>
+
+        <button type="button" id="game-close-button" class="game-close-button" aria-label="ミニゲームを閉じる">
+          ×
+        </button>
+      </div>
+
+      <div class="game-status">
+        <span>
+          SCORE
+          <strong id="game-score">0</strong>
+        </span>
+
+        <span>
+          COMBO
+          <strong id="game-combo">0</strong>
+        </span>
+
+        <span>
+          TIME
+          <strong id="game-time">30</strong>
+        </span>
+      </div>
+
+      <div class="game-canvas-wrapper">
+        <canvas id="game-canvas" width="480" height="600"></canvas>
+      </div>
+
+      <div class="game-message-area">
+        <p id="game-message">
+          「ゲーム開始」を押してください。
+        </p>
+      </div>
+
+      <div class="game-moves">
+        <button type="button" id="game-move-display" class="game-move-button active" disabled>
+          ❄ こおりのつぶて
+        </button>
+      </div>
+
+      <div class="game-controls">
+        <p>
+          移動：← →
+          <br>
+          発射：Space
+        </p>
+
+        <button type="button" id="game-start-button" class="game-start-button">
+          ゲーム開始
+        </button>
+      </div>
+
+    </div>
+  </div>
 
 </body>
 
