@@ -6,7 +6,8 @@ let allPokemon = [];
 let selectedPokemon = null;
 let selectedCard = null;
 
-let moveSearchTerm = "";
+let moveTypeFilter = "";
+let moveCategoryFilter = "";
 
 let moveSortState = {
   key: "power",
@@ -28,17 +29,21 @@ const STAT_LIST = [
 // ==============================
 
 // JSONを読み込む
-fetch("./data/pokemon.json?ver=2")
+fetch("./data/pokemon.json?ver=3")
   .then(response => {
     if (!response.ok) {
-      throw new Error(`JSONの読み込みに失敗しました: ${response.status}`);
+      throw new Error(
+        `JSONの読み込みに失敗しました: ${response.status}`
+      );
     }
 
     return response.json();
   })
   .then(data => {
     if (!Array.isArray(data)) {
-      throw new Error("pokemon.jsonが配列形式ではありません。");
+      throw new Error(
+        "pokemon.jsonが配列形式ではありません。"
+      );
     }
 
     allPokemon = data.filter(isValidPokemon);
@@ -47,7 +52,8 @@ fetch("./data/pokemon.json?ver=2")
   .catch(error => {
     console.error(error);
 
-    const list = document.getElementById("pokemon-list");
+    const list =
+      document.getElementById("pokemon-list");
 
     if (list) {
       list.innerHTML = `
@@ -65,17 +71,22 @@ fetch("./data/pokemon.json?ver=2")
 
 // ポケモン一覧をカード形式で表示する
 function displayPokemon(pokemonList) {
-  const list = document.getElementById("pokemon-list");
-  const result = document.getElementById("result");
+  const list =
+    document.getElementById("pokemon-list");
+
+  const result =
+    document.getElementById("result");
 
   if (!list) {
-    console.error("#pokemon-list が見つかりません。");
+    console.error(
+      "#pokemon-list が見つかりません。"
+    );
+
     return;
   }
 
   list.innerHTML = "";
 
-  // ソート・絞り込み時に詳細表示を解除
   selectedPokemon = null;
   selectedCard = null;
 
@@ -83,17 +94,23 @@ function displayPokemon(pokemonList) {
     result.innerHTML = "";
   }
 
-  if (!Array.isArray(pokemonList) || pokemonList.length === 0) {
+  if (
+    !Array.isArray(pokemonList) ||
+    pokemonList.length === 0
+  ) {
     list.innerHTML = `
       <p class="empty-message">
         表示できるポケモンがいません。
       </p>
     `;
+
     return;
   }
 
   pokemonList.forEach(pokemon => {
-    const card = document.createElement("div");
+    const card =
+      document.createElement("div");
+
     card.className = "card";
 
     card.innerHTML = `
@@ -126,22 +143,28 @@ function displayPokemon(pokemonList) {
 
 // カードクリック時に詳細欄を表示する
 function showPokemon(pokemon, card) {
-  const result = document.getElementById("result");
+  const result =
+    document.getElementById("result");
 
   if (!result) {
-    console.error("#result が見つかりません。");
+    console.error(
+      "#result が見つかりません。"
+    );
+
     return;
   }
 
-  const isSamePokemon = selectedPokemon === pokemon.name;
+  const isSamePokemon =
+    selectedPokemon === pokemon.name;
 
   clearSelectedCard();
 
-  // 同じカードをもう一度クリックした場合は閉じる
+  // 同じカードを再クリックしたら閉じる
   if (isSamePokemon) {
     result.innerHTML = "";
     selectedPokemon = null;
     selectedCard = null;
+
     return;
   }
 
@@ -150,7 +173,8 @@ function showPokemon(pokemon, card) {
   selectedPokemon = pokemon.name;
   selectedCard = card;
 
-  moveSearchTerm = "";
+  moveTypeFilter = "";
+  moveCategoryFilter = "";
 
   moveSortState = {
     key: "power",
@@ -170,7 +194,11 @@ function showPokemon(pokemon, card) {
           <h2>${pokemon.name}</h2>
 
           ${pokemon.category
-      ? `<p class="result-category">${pokemon.category}</p>`
+      ? `
+                <p class="result-category">
+                  ${pokemon.category}
+                </p>
+              `
       : ""
     }
 
@@ -182,11 +210,13 @@ function showPokemon(pokemon, card) {
 
       <section class="detail-section">
         <h3>種族値</h3>
+
         ${createStatsBarHtml(pokemon)}
       </section>
 
       <section class="detail-section">
         <h3>特性</h3>
+
         ${createAbilitiesHtml(pokemon)}
       </section>
 
@@ -203,7 +233,7 @@ function showPokemon(pokemon, card) {
 }
 
 // ==============================
-// ソート・フィルター機能
+// ポケモンのソート・フィルター
 // ==============================
 
 // HP順
@@ -238,9 +268,10 @@ function sortBySpeed() {
 
 // メガシンカだけ表示
 function showMegaOnly() {
-  const filtered = allPokemon.filter(pokemon =>
-    pokemon.name.includes("メガ")
-  );
+  const filtered =
+    allPokemon.filter(pokemon =>
+      pokemon.name.includes("メガ")
+    );
 
   displayPokemon(filtered);
 }
@@ -255,7 +286,10 @@ function sortByStat(keys) {
   const sorted = [...allPokemon];
 
   sorted.sort((a, b) => {
-    return getStat(b, keys) - getStat(a, keys);
+    return (
+      getStat(b, keys) -
+      getStat(a, keys)
+    );
   });
 
   displayPokemon(sorted);
@@ -267,9 +301,10 @@ function sortByStat(keys) {
 
 // カードのタイプ表示
 function createCardTypeHtml(pokemon) {
-  const types = Array.isArray(pokemon.types)
-    ? pokemon.types.filter(Boolean)
-    : [];
+  const types =
+    Array.isArray(pokemon.types)
+      ? pokemon.types.filter(Boolean)
+      : [];
 
   if (types.length === 0) {
     return "";
@@ -289,11 +324,15 @@ function createCardTypeHtml(pokemon) {
 // カード内のランク表示
 function createRankHtml(pokemon) {
   return STAT_LIST.map(stat => {
-    const value = getStat(pokemon, stat.keys);
+    const value =
+      getStat(pokemon, stat.keys);
 
     return `
       <span class="rank-item">
-        <span class="rank-label">${stat.label}</span>
+        <span class="rank-label">
+          ${stat.label}
+        </span>
+
         <span class="${getRankClass(value)}">
           ${getRank(value)}
         </span>
@@ -308,9 +347,10 @@ function createRankHtml(pokemon) {
 
 // 詳細欄のタイプバッジ
 function createTypeBadgesHtml(pokemon) {
-  const types = Array.isArray(pokemon.types)
-    ? pokemon.types.filter(Boolean)
-    : [];
+  const types =
+    Array.isArray(pokemon.types)
+      ? pokemon.types.filter(Boolean)
+      : [];
 
   if (types.length === 0) {
     return "";
@@ -348,8 +388,13 @@ function createBasicInfoHtml(pokemon) {
       ${hasHeight
       ? `
             <div class="basic-info-item">
-              <span class="basic-info-label">高さ</span>
-              <span>${pokemon.height}</span>
+              <span class="basic-info-label">
+                高さ
+              </span>
+
+              <span>
+                ${pokemon.height}
+              </span>
             </div>
           `
       : ""
@@ -358,8 +403,13 @@ function createBasicInfoHtml(pokemon) {
       ${hasWeight
       ? `
             <div class="basic-info-item">
-              <span class="basic-info-label">重さ</span>
-              <span>${pokemon.weight}</span>
+              <span class="basic-info-label">
+                重さ
+              </span>
+
+              <span>
+                ${pokemon.weight}
+              </span>
             </div>
           `
       : ""
@@ -373,15 +423,29 @@ function createStatsBarHtml(pokemon) {
   return `
     <div class="stats-list">
       ${STAT_LIST.map(stat => {
-    const value = getStat(pokemon, stat.keys);
-    const width = Math.min((value / 200) * 100, 100);
+    const value =
+      getStat(pokemon, stat.keys);
+
+    const width =
+      Math.min(
+        (value / 200) * 100,
+        100
+      );
 
     return `
           <div class="stat-row">
             <div class="stat-text">
-              <span class="stat-name">${stat.label}</span>
-              <strong class="stat-value">${value}</strong>
-              <span class="${getRankClass(value)} stat-rank">
+              <span class="stat-name">
+                ${stat.label}
+              </span>
+
+              <strong class="stat-value">
+                ${value}
+              </strong>
+
+              <span
+                class="${getRankClass(value)} stat-rank"
+              >
                 ${getRank(value)}
               </span>
             </div>
@@ -401,10 +465,16 @@ function createStatsBarHtml(pokemon) {
 
 // 特性一覧
 function createAbilitiesHtml(pokemon) {
-  const abilities = normalizeAbilities(pokemon.abilities);
-  const hiddenAbilities = getHiddenAbilities(pokemon);
+  const abilities =
+    normalizeAbilities(pokemon.abilities);
 
-  if (abilities.length === 0 && hiddenAbilities.length === 0) {
+  const hiddenAbilities =
+    getHiddenAbilities(pokemon);
+
+  if (
+    abilities.length === 0 &&
+    hiddenAbilities.length === 0
+  ) {
     return `
       <p class="no-data">
         特性データはありません。
@@ -416,15 +486,27 @@ function createAbilitiesHtml(pokemon) {
     <ul class="abilities-list">
       ${abilities.map(ability => `
         <li>
-          <span class="ability-label">通常特性</span>
-          <span>${ability}</span>
+          <span class="ability-label">
+            通常特性
+          </span>
+
+          <span>
+            ${ability}
+          </span>
         </li>
       `).join("")}
 
       ${hiddenAbilities.map(ability => `
         <li class="hidden-ability">
-          <span class="ability-label hidden-label">夢特性</span>
-          <span>${ability}</span>
+          <span
+            class="ability-label hidden-label"
+          >
+            夢特性
+          </span>
+
+          <span>
+            ${ability}
+          </span>
         </li>
       `).join("")}
     </ul>
@@ -438,7 +520,9 @@ function createMemoHtml(pokemon) {
   }
 
   return `
-    <section class="detail-section memo-section">
+    <section
+      class="detail-section memo-section"
+    >
       <h3>メモ</h3>
 
       <p class="memo">
@@ -453,14 +537,11 @@ function createMemoHtml(pokemon) {
 // ==============================
 
 // 覚える技一覧
-// ==============================
-// 技一覧
-// ==============================
-
 function renderMoves(pokemon) {
-  const originalMoves = Array.isArray(pokemon.moves)
-    ? pokemon.moves
-    : [];
+  const originalMoves =
+    Array.isArray(pokemon.moves)
+      ? pokemon.moves
+      : [];
 
   if (originalMoves.length === 0) {
     return `
@@ -474,20 +555,23 @@ function renderMoves(pokemon) {
     `;
   }
 
-  const filteredMoves = filterMovesByName(
-    originalMoves,
-    moveSearchTerm
-  );
+  const filteredMoves =
+    filterMoves(originalMoves);
 
-  const moves = sortMovesList(
-    filteredMoves,
-    moveSortState.key,
-    moveSortState.direction
-  );
+  const moves =
+    sortMovesList(
+      filteredMoves,
+      moveSortState.key,
+      moveSortState.direction
+    );
 
-  const pokemonTypes = Array.isArray(pokemon.types)
-    ? pokemon.types
-    : [];
+  const pokemonTypes =
+    Array.isArray(pokemon.types)
+      ? pokemon.types
+      : [];
+
+  const moveTypes =
+    getMoveTypes(originalMoves);
 
   return `
     <section class="moves-section">
@@ -499,25 +583,82 @@ function renderMoves(pokemon) {
         </p>
       </div>
 
-      <div class="moves-tools">
-        <label class="move-search-label">
-          <span>技名で絞り込み</span>
+      <div class="moves-filters">
+        <label class="moves-filter-label">
+          <span>技タイプ</span>
 
-          <input
-            type="search"
-            class="move-search-input"
-            value="${escapeHtmlAttribute(moveSearchTerm)}"
-            placeholder="例：れいとう、こおり"
-            oninput="filterMoves(this.value)"
+          <select
+            class="moves-filter-select"
+            onchange="changeMoveTypeFilter(this.value)"
           >
+            <option value="">
+              すべて
+            </option>
+
+            ${moveTypes.map(type => `
+              <option
+                value="${type}"
+                ${moveTypeFilter === type
+      ? "selected"
+      : ""
+    }
+              >
+                ${type}
+              </option>
+            `).join("")}
+          </select>
         </label>
 
-        ${moveSearchTerm
+        <label class="moves-filter-label">
+          <span>分類</span>
+
+          <select
+            class="moves-filter-select"
+            onchange="changeMoveCategoryFilter(this.value)"
+          >
+            <option value="">
+              すべて
+            </option>
+
+            <option
+              value="物理"
+              ${moveCategoryFilter === "物理"
+      ? "selected"
+      : ""
+    }
+            >
+              物理
+            </option>
+
+            <option
+              value="特殊"
+              ${moveCategoryFilter === "特殊"
+      ? "selected"
+      : ""
+    }
+            >
+              特殊
+            </option>
+
+            <option
+              value="変化"
+              ${moveCategoryFilter === "変化"
+      ? "selected"
+      : ""
+    }
+            >
+              変化
+            </option>
+          </select>
+        </label>
+
+        ${moveTypeFilter ||
+      moveCategoryFilter
       ? `
               <button
                 type="button"
-                class="move-search-clear"
-                onclick="clearMoveSearch()"
+                class="moves-filter-clear"
+                onclick="clearMoveFilters()"
               >
                 絞り込み解除
               </button>
@@ -589,40 +730,73 @@ function renderMoves(pokemon) {
           <tbody>
             ${moves.length > 0
       ? moves.map(move => {
-        const moveName = move.name || "—";
-        const moveType = move.type || "不明";
-        const moveCategory = move.category || "";
-        const movePower = formatMoveValue(move.power);
-        const moveAccuracy = formatMoveValue(move.accuracy);
+        const moveName =
+          move.name || "—";
+
+        const moveType =
+          move.type || "不明";
+
+        const moveCategory =
+          move.category || "";
+
+        const movePower =
+          formatMoveValue(
+            move.power
+          );
+
+        const moveAccuracy =
+          formatMoveValue(
+            move.accuracy
+          );
 
         const isSameType =
-          pokemonTypes.includes(moveType);
+          pokemonTypes.includes(
+            moveType
+          );
 
         const isAccuracy100 =
-          Number(move.accuracy) === 100;
+          Number(
+            move.accuracy
+          ) === 100;
 
         return `
                       <tr>
-                        <td class="${isSameType ? "same-type-move" : ""}">
+                        <td
+                          class="${isSameType
+            ? "same-type-move"
+            : ""
+          }"
+                        >
                           ${moveName}
                         </td>
 
-                        <td class="move-type type-${moveType}">
+                        <td
+                          class="move-type type-${moveType}"
+                        >
                           ${moveType}
                         </td>
 
                         <td
                           class="move-category"
-                          title="${moveCategory || "分類不明"}"
+                          title="${moveCategory ||
+          "分類不明"
+          }"
                         >
-                          ${getMoveCategorySymbol(moveCategory)}
+                          ${getMoveCategorySymbol(
+            moveCategory
+          )}
                         </td>
 
                         <td class="move-number">
                           ${movePower}
                         </td>
 
-                        <td class="move-number ${isAccuracy100 ? "accuracy-100" : ""}">
+                        <td
+                          class="move-number ${isAccuracy100
+            ? "accuracy-100"
+            : ""
+          }"
+                        >
                           ${moveAccuracy}
                         </td>
                       </tr>
@@ -634,7 +808,7 @@ function renderMoves(pokemon) {
                       colspan="5"
                       class="moves-empty"
                     >
-                      「${escapeHtml(moveSearchTerm)}」に一致する技はありません。
+                      条件に一致する技はありません。
                     </td>
                   </tr>
                 `
@@ -644,108 +818,154 @@ function renderMoves(pokemon) {
       </div>
 
       <div class="move-symbol-guide">
-        <span><strong>★</strong> 物理</span>
-        <span><strong>◎</strong> 特殊</span>
-        <span><strong>－</strong> 変化技</span>
+        <span>
+          <strong>★</strong>
+          物理
+        </span>
+
+        <span>
+          <strong>◎</strong>
+          特殊
+        </span>
+
+        <span>
+          <strong>－</strong>
+          変化技
+        </span>
       </div>
     </section>
   `;
 }
 
-// 技名で絞り込む
-function filterMovesByName(moves, searchTerm) {
-  const normalizedSearch = normalizeSearchText(searchTerm);
+// ==============================
+// 技の絞り込み
+// ==============================
 
-  if (!normalizedSearch) {
-    return [...moves];
+// 条件に一致する技だけ返す
+function filterMoves(moves) {
+  return moves.filter(move => {
+    const moveType =
+      String(move.type || "").trim();
+
+    const moveCategory =
+      normalizeMoveCategory(
+        move.category
+      );
+
+    if (
+      moveTypeFilter &&
+      moveType !== moveTypeFilter
+    ) {
+      return false;
+    }
+
+    if (
+      moveCategoryFilter &&
+      moveCategory !== moveCategoryFilter
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
+// 技タイプを変更
+function changeMoveTypeFilter(value) {
+  moveTypeFilter = value;
+
+  refreshMovesSection();
+}
+
+// 分類を変更
+function changeMoveCategoryFilter(value) {
+  moveCategoryFilter = value;
+
+  refreshMovesSection();
+}
+
+// 技の絞り込みを解除
+function clearMoveFilters() {
+  moveTypeFilter = "";
+  moveCategoryFilter = "";
+
+  refreshMovesSection();
+}
+
+// 技一覧に存在するタイプを取得
+function getMoveTypes(moves) {
+  const types =
+    moves
+      .map(move =>
+        String(move.type || "").trim()
+      )
+      .filter(Boolean);
+
+  return [...new Set(types)]
+    .sort((a, b) =>
+      a.localeCompare(
+        b,
+        "ja",
+        {
+          numeric: true,
+          sensitivity: "base"
+        }
+      )
+    );
+}
+
+// 分類名を統一
+function normalizeMoveCategory(category) {
+  const value =
+    String(category || "").trim();
+
+  if (value.includes("物理")) {
+    return "物理";
   }
 
-  return moves.filter(move => {
-    const moveName = normalizeSearchText(move.name);
+  if (value.includes("特殊")) {
+    return "特殊";
+  }
 
-    return moveName.includes(normalizedSearch);
-  });
+  if (value.includes("変化")) {
+    return "変化";
+  }
+
+  return value;
 }
 
-// 入力された文字で技表を更新する
-function filterMoves(value) {
-  moveSearchTerm = value;
+// ==============================
+// 技一覧の再描画
+// ==============================
 
-  refreshMovesSection({
-    focusSearchInput: true
-  });
-}
-
-// 絞り込みを解除する
-function clearMoveSearch() {
-  moveSearchTerm = "";
-
-  refreshMovesSection({
-    focusSearchInput: true
-  });
-}
-
-// 技一覧部分だけ再描画する
-function refreshMovesSection(options = {}) {
-  const pokemon = allPokemon.find(item =>
-    item.name === selectedPokemon
-  );
+function refreshMovesSection() {
+  const pokemon =
+    allPokemon.find(item =>
+      item.name === selectedPokemon
+    );
 
   if (!pokemon) {
     return;
   }
 
   const currentSection =
-    document.querySelector(".moves-section");
+    document.querySelector(
+      ".moves-section"
+    );
 
   if (!currentSection) {
     return;
   }
 
-  currentSection.outerHTML = renderMoves(pokemon);
-
-  if (options.focusSearchInput) {
-    const searchInput =
-      document.querySelector(".move-search-input");
-
-    if (searchInput) {
-      searchInput.focus();
-
-      const endPosition = searchInput.value.length;
-
-      searchInput.setSelectionRange(
-        endPosition,
-        endPosition
-      );
-    }
-  }
+  currentSection.outerHTML =
+    renderMoves(pokemon);
 }
 
-// 検索用の文字列を整える
-function normalizeSearchText(value) {
-  return String(value || "")
-    .trim()
-    .toLowerCase()
-    .normalize("NFKC")
-    .replace(/\s+/g, "");
-}
+// ==============================
+// 技一覧のソート
+// ==============================
 
-// HTML本文用エスケープ
-function escapeHtml(value) {
-  return String(value || "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-// inputのvalue属性用エスケープ
-function escapeHtmlAttribute(value) {
-  return escapeHtml(value);
-}
-
-// 技表の見出しをクリックしたときの処理
+// 見出しクリック時の処理
 function sortMoves(key) {
   if (moveSortState.key === key) {
     moveSortState.direction =
@@ -756,7 +976,8 @@ function sortMoves(key) {
     moveSortState.key = key;
 
     moveSortState.direction =
-      key === "power" || key === "accuracy"
+      key === "power" ||
+        key === "accuracy"
         ? "desc"
         : "asc";
   }
@@ -765,33 +986,52 @@ function sortMoves(key) {
 }
 
 // 技一覧を並び替える
-function sortMovesList(moves, key, direction) {
+function sortMovesList(
+  moves,
+  key,
+  direction
+) {
   const sorted = [...moves];
 
   sorted.sort((a, b) => {
-    let result = 0;
-
-    if (key === "power" || key === "accuracy") {
-      result = compareMoveNumbers(
+    if (
+      key === "power" ||
+      key === "accuracy"
+    ) {
+      return compareMoveNumbers(
         a[key],
         b[key],
         direction
       );
-
-      return result;
     }
 
-    const valueA = String(a[key] || "");
-    const valueB = String(b[key] || "");
+    let valueA =
+      String(a[key] || "");
 
-    result = valueA.localeCompare(
-      valueB,
-      "ja",
-      {
-        numeric: true,
-        sensitivity: "base"
-      }
-    );
+    let valueB =
+      String(b[key] || "");
+
+    if (key === "category") {
+      valueA =
+        normalizeMoveCategory(
+          a.category
+        );
+
+      valueB =
+        normalizeMoveCategory(
+          b.category
+        );
+    }
+
+    const result =
+      valueA.localeCompare(
+        valueB,
+        "ja",
+        {
+          numeric: true,
+          sensitivity: "base"
+        }
+      );
 
     return direction === "asc"
       ? result
@@ -801,13 +1041,23 @@ function sortMovesList(moves, key, direction) {
   return sorted;
 }
 
-// 威力・命中などの数値比較
-function compareMoveNumbers(valueA, valueB, direction) {
-  const numberA = toSortableMoveNumber(valueA);
-  const numberB = toSortableMoveNumber(valueB);
+// 威力・命中の数値比較
+function compareMoveNumbers(
+  valueA,
+  valueB,
+  direction
+) {
+  const numberA =
+    toSortableMoveNumber(valueA);
+
+  const numberB =
+    toSortableMoveNumber(valueB);
 
   // 数値がない技は常に一番下
-  if (numberA === null && numberB === null) {
+  if (
+    numberA === null &&
+    numberB === null
+  ) {
     return 0;
   }
 
@@ -824,7 +1074,7 @@ function compareMoveNumbers(valueA, valueB, direction) {
     : numberB - numberA;
 }
 
-// ソートできる数値へ変換
+// ソート用の数値へ変換
 function toSortableMoveNumber(value) {
   if (
     value === undefined ||
@@ -836,14 +1086,15 @@ function toSortableMoveNumber(value) {
     return null;
   }
 
-  const numberValue = Number(value);
+  const numberValue =
+    Number(value);
 
   return Number.isNaN(numberValue)
     ? null
     : numberValue;
 }
 
-// 現在のソート方向を表示
+// 現在のソート方向
 function getMoveSortMark(key) {
   if (moveSortState.key !== key) {
     return "";
@@ -854,20 +1105,20 @@ function getMoveSortMark(key) {
     : " ▼";
 }
 
-// 技の分類を記号に変換
+// 技の分類を記号へ変換
 function getMoveCategorySymbol(category) {
   const normalizedCategory =
-    String(category || "").trim();
+    normalizeMoveCategory(category);
 
-  if (normalizedCategory.includes("物理")) {
+  if (normalizedCategory === "物理") {
     return "★";
   }
 
-  if (normalizedCategory.includes("特殊")) {
+  if (normalizedCategory === "特殊") {
     return "◎";
   }
 
-  if (normalizedCategory.includes("変化")) {
+  if (normalizedCategory === "変化") {
     return "－";
   }
 
@@ -904,19 +1155,22 @@ function getImage(pokemon) {
 
 // 種族値を数値として取得
 function getStat(pokemon, keys) {
-  const keyList = Array.isArray(keys)
-    ? keys
-    : [keys];
+  const keyList =
+    Array.isArray(keys)
+      ? keys
+      : [keys];
 
   for (const key of keyList) {
-    const value = pokemon.stats?.[key];
+    const value =
+      pokemon.stats?.[key];
 
     if (
       value !== undefined &&
       value !== null &&
       value !== ""
     ) {
-      const numberValue = Number(value);
+      const numberValue =
+        Number(value);
 
       return Number.isNaN(numberValue)
         ? 0
@@ -927,7 +1181,7 @@ function getStat(pokemon, keys) {
   return 0;
 }
 
-// 通常特性を文字列配列にそろえる
+// 通常特性を文字列配列へ統一
 function normalizeAbilities(abilities) {
   if (!Array.isArray(abilities)) {
     return [];
@@ -935,7 +1189,9 @@ function normalizeAbilities(abilities) {
 
   return abilities
     .map(ability => {
-      if (typeof ability === "string") {
+      if (
+        typeof ability === "string"
+      ) {
         return ability.trim();
       }
 
@@ -943,14 +1199,17 @@ function normalizeAbilities(abilities) {
         ability &&
         typeof ability === "object"
       ) {
-        return String(ability.name || "").trim();
+        return String(
+          ability.name || ""
+        ).trim();
       }
 
       return "";
     })
-    .filter(name => {
-      return name && !isNonAbilityData(name);
-    });
+    .filter(name =>
+      name &&
+      !isNonAbilityData(name)
+    );
 }
 
 // 夢特性を配列で取得
@@ -958,7 +1217,8 @@ function getHiddenAbilities(pokemon) {
   const hiddenAbilities = [];
 
   if (
-    typeof pokemon.hiddenAbility === "string" &&
+    typeof pokemon.hiddenAbility ===
+    "string" &&
     pokemon.hiddenAbility.trim()
   ) {
     hiddenAbilities.push(
@@ -966,28 +1226,42 @@ function getHiddenAbilities(pokemon) {
     );
   }
 
-  if (Array.isArray(pokemon.hiddenAbilities)) {
-    pokemon.hiddenAbilities.forEach(ability => {
-      let abilityName = "";
+  if (
+    Array.isArray(
+      pokemon.hiddenAbilities
+    )
+  ) {
+    pokemon.hiddenAbilities.forEach(
+      ability => {
+        let abilityName = "";
 
-      if (typeof ability === "string") {
-        abilityName = ability.trim();
-      } else if (
-        ability &&
-        typeof ability === "object"
-      ) {
-        abilityName = String(
-          ability.name || ""
-        ).trim();
-      }
+        if (
+          typeof ability === "string"
+        ) {
+          abilityName =
+            ability.trim();
+        } else if (
+          ability &&
+          typeof ability === "object"
+        ) {
+          abilityName =
+            String(
+              ability.name || ""
+            ).trim();
+        }
 
-      if (
-        abilityName &&
-        !isNonAbilityData(abilityName)
-      ) {
-        hiddenAbilities.push(abilityName);
+        if (
+          abilityName &&
+          !isNonAbilityData(
+            abilityName
+          )
+        ) {
+          hiddenAbilities.push(
+            abilityName
+          );
+        }
       }
-    });
+    );
   }
 
   return [...new Set(hiddenAbilities)];
@@ -1023,7 +1297,9 @@ function isValidPokemon(pokemon) {
 // 選択中カードを解除
 function clearSelectedCard() {
   if (selectedCard) {
-    selectedCard.classList.remove("selected");
+    selectedCard.classList.remove(
+      "selected"
+    );
   }
 }
 
@@ -1033,7 +1309,8 @@ function clearSelectedCard() {
 
 // 種族値からランク文字を返す
 function getRank(value) {
-  const numberValue = Number(value);
+  const numberValue =
+    Number(value);
 
   if (numberValue >= 120) return "S";
   if (numberValue >= 100) return "A";
@@ -1046,7 +1323,8 @@ function getRank(value) {
 
 // 種族値からCSSクラス名を返す
 function getRankClass(value) {
-  const rank = getRank(value);
+  const rank =
+    getRank(value);
 
   return `rank rank-${rank.toLowerCase()}`;
 }
