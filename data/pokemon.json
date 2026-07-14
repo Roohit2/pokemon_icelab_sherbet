@@ -20,8 +20,22 @@
       "spd": 100,
       "spe": 109
     },
-    "abilities": [],
-    "hiddenAbilities": [],
+    "abilities": [
+      {
+        "name": "ゆきがくれ",
+        "description": "天気が『ゆき』の時、相手の技の命中率が0.8倍になる。"
+      },
+      {
+        "name": "ゆきふらし",
+        "description": ""
+      }
+    ],
+    "hiddenAbilities": [
+      {
+        "name": "*ゆきふらし",
+        "description": "戦闘に出ると5ターンの間、天気が『ゆき』になる。"
+      }
+    ],
     "analysis": {
       "topKills": [],
       "switchIn": []
@@ -29,7 +43,7 @@
   },
   {
     "id": 351105,
-    "url": "https://yakkun.com/ch/zukan/n351i",
+    "url": "https://yakkun.com/ch/zukan/n351",
     "no": "351",
     "name": "ポワルン",
     "category": "てんきポケモン",
@@ -48,7 +62,12 @@
       "spd": 70,
       "spe": 70
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "name": "てんきや",
+        "description": "天気が『にほんばれ』の時は『ほのお』タイプに、『あめ』の時は『みず』タイプに、『ゆき』の時は『こおり』タイプになり、姿がそれぞれ変化する。"
+      }
+    ],
     "hiddenAbilities": [],
     "analysis": {
       "topKills": [],
@@ -72,11 +91,11 @@
     "abilities": [
       {
         "name": "せいしんりょく",
-        "description": ""
+        "description": "相手の技で『ひるみ』状態にならない。なお、技『きあいパンチ』には影響しない。相手の特性『いかく』の効果も受けない。(第7世代までは『いかく』の効果は受ける)"
       },
       {
         "name": "アイスボディ",
-        "description": ""
+        "description": "天気が『ゆき』の時、毎ターン終了時にHPが最大HPの1/16回復する。"
       }
     ],
     "analysis": {
@@ -87,7 +106,12 @@
     "category": "がんめんポケモン",
     "height": "1.5m",
     "weight": "256.5kg",
-    "hiddenAbilities": [],
+    "hiddenAbilities": [
+      {
+        "name": "*ムラっけ",
+        "description": "毎ターン終了時、『こうげき』『ぼうぎょ』『とくこう』『とくぼう』『すばやさ』いずれかのランクが2段階上がり、別のランクが1段階下がる。(第7世代までは『回避率』『命中率』も含まれていた)"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n362.gif",
     "imagePath": "images/n362.png",
     "no": "362"
@@ -109,7 +133,7 @@
     "abilities": [
       {
         "name": "フリーズスキン",
-        "description": ""
+        "description": "自分の『ノーマル』タイプの技が『こおり』タイプになり、さらに威力が1.2倍になる。(第6世代は1.3倍)"
       }
     ],
     "analysis": {
@@ -143,7 +167,7 @@
     "abilities": [
       {
         "name": "ゆきふらし",
-        "description": ""
+        "description": "戦闘に出ると5ターンの間、天気が『ゆき』になる。"
       }
     ],
     "analysis": {
@@ -154,7 +178,12 @@
     "category": "じゅひょうポケモン",
     "height": "2.2m",
     "weight": "135.5kg",
-    "hiddenAbilities": [],
+    "hiddenAbilities": [
+      {
+        "name": "*ぼうおん",
+        "description": "音系の技『いにしえのうた』『いびき』『いやしのすず』『いやなおと』『うたう』『うたかたのアリア』『エコーボイス』『おしゃべり』『おたけび』『きんぞくおん』『くさぶえ』『さわぐ』『スケイルノイズ』『すてゼリフ』『チャームボイス』『ちょうおんぱ』『とおぼえ』『ないしょばなし』『なきごえ』『バークアウト』『ハイパーボイス』『ばくおんぱ』『ほえる』『ほろびのうた』『むしのさざめき』『りんしょう』『ブレイジングソウルビート』『オーバードライブ』『ぶきみなじゅもん』『フレアソング』『みわくのボイス』『サイコノイズ』を受けない。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n460.gif",
     "imagePath": "images/n460.png",
     "no": "460"
@@ -177,7 +206,7 @@
     "abilities": [
       {
         "name": "ゆきふらし",
-        "description": ""
+        "description": "戦闘に出ると5ターンの間、天気が『ゆき』になる。"
       }
     ],
     "analysis": {
@@ -211,7 +240,7 @@
     "abilities": [
       {
         "name": "プレッシャー",
-        "description": ""
+        "description": "技を受けた時、相手の技のPPを1多く減らす(合計2減る)。自分自身が対象の技などには効果がない。(ダブルバトルでこの特性を持つ2体のポケモンに範囲攻撃を与えると、合計3減る)"
       }
     ],
     "analysis": {
@@ -222,7 +251,12 @@
     "category": "かぎづめポケモン",
     "height": "1.1m",
     "weight": "34.0kg",
-    "hiddenAbilities": [],
+    "hiddenAbilities": [
+      {
+        "name": "*わるいてぐせ",
+        "description": "接触技(直接攻撃)を受けた時、自分が道具を持っていなければ、相手の持っている道具を奪う。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n461.gif",
     "imagePath": "images/n461.png",
     "no": "461"
@@ -246,7 +280,7 @@
     "abilities": [
       {
         "name": "ゆきがくれ",
-        "description": ""
+        "description": "天気が『ゆき』の時、相手の技の命中率が0.8倍になる。"
       }
     ],
     "analysis": {
@@ -256,7 +290,12 @@
     "url": "https://yakkun.com/ch/zukan/n471",
     "height": "0.8m",
     "weight": "25.9kg",
-    "hiddenAbilities": [],
+    "hiddenAbilities": [
+      {
+        "name": "*アイスボディ",
+        "description": "天気が『ゆき』の時、毎ターン終了時にHPが最大HPの1/16回復する。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n471.gif",
     "imagePath": "images/n471.png",
     "no": "471"
@@ -279,11 +318,11 @@
     "abilities": [
       {
         "name": "どんかん",
-        "description": ""
+        "description": "『メロメロ』『ちょうはつ』『ゆうわく』状態にならない。第8世代からは、相手の特性『いかく』の効果も受けない。"
       },
       {
         "name": "ゆきがくれ",
-        "description": ""
+        "description": "天気が『ゆき』の時、相手の技の命中率が0.8倍になる。"
       }
     ],
     "analysis": {
@@ -291,10 +330,15 @@
       "switchIn": []
     },
     "url": "https://yakkun.com/ch/zukan/n473",
-    "category": "ほんキバポケモン",
+    "category": "２ほんキバポケモン",
     "height": "2.5m",
     "weight": "291.0kg",
-    "hiddenAbilities": [],
+    "hiddenAbilities": [
+      {
+        "name": "*あついしぼう",
+        "description": "『ほのお』『こおり』タイプの技を受けた時、ダメージが半減する。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n473.gif",
     "imagePath": "images/n473.png",
     "no": "473"
@@ -317,7 +361,7 @@
     "abilities": [
       {
         "name": "ゆきがくれ",
-        "description": ""
+        "description": "天気が『ゆき』の時、相手の技の命中率が0.8倍になる。"
       }
     ],
     "analysis": {
@@ -328,7 +372,12 @@
     "category": "ゆきぐにポケモン",
     "height": "1.3m",
     "weight": "26.6kg",
-    "hiddenAbilities": [],
+    "hiddenAbilities": [
+      {
+        "name": "*のろわれボディ",
+        "description": "相手から技を受けた時、30%の確率で3ターンの間、その相手の技を『かなしばり』状態にする。技が無効化された場合や、自分が『みがわり』状態の場合は発動しない。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n478.gif",
     "imagePath": "images/n478.png",
     "no": "478"
@@ -350,7 +399,12 @@
       "spd": 100,
       "spe": 120
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "name": "ゆきふらし",
+        "description": "戦闘に出ると5ターンの間、天気が『ゆき』になる。"
+      }
+    ],
     "hiddenAbilities": [],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n478m.gif",
     "imagePath": "images/n478m.png",
@@ -382,7 +436,12 @@
       "spd": 107,
       "spe": 86
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "name": "ふゆう",
+        "description": "『じめん』タイプの技を受けない。また、技『どくびし』『まきびし』『ねばねばネット』や特性『ありじごく』の効果を受けない。『エレキフィールド』『サイコフィールド』『グラスフィールド』『ミストフィールド』の効果も受けない。"
+      }
+    ],
     "hiddenAbilities": [],
     "analysis": {
       "topKills": [],
@@ -406,8 +465,22 @@
       "spd": 95,
       "spe": 79
     },
-    "abilities": [],
-    "hiddenAbilities": [],
+    "abilities": [
+      {
+        "name": "アイスボディ",
+        "description": "天気が『ゆき』の時、毎ターン終了時にHPが最大HPの1/16回復する。"
+      },
+      {
+        "name": "ゆきふらし",
+        "description": "戦闘に出ると5ターンの間、天気が『ゆき』になる。"
+      }
+    ],
+    "hiddenAbilities": [
+      {
+        "name": "*くだけるよろい",
+        "description": "物理技を受けると、『ぼうぎょ』ランクが1段階下がり、『すばやさ』ランクが2段階上がる。(第6世代は1段階)"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n584.gif",
     "imagePath": "images/n584.png",
     "analysis": {
@@ -434,8 +507,22 @@
       "spd": 80,
       "spe": 50
     },
-    "abilities": [],
-    "hiddenAbilities": [],
+    "abilities": [
+      {
+        "name": "ゆきがくれ",
+        "description": "天気が『ゆき』の時、相手の技の命中率が0.8倍になる。"
+      },
+      {
+        "name": "ゆきかき",
+        "description": "天気が『ゆき』の時、『すばやさ』が2倍になる。"
+      }
+    ],
+    "hiddenAbilities": [
+      {
+        "name": "*すいすい",
+        "description": "天気が『あめ』の時、『すばやさ』が2倍になる。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n614.gif",
     "imagePath": "images/n614.png",
     "analysis": {
@@ -462,8 +549,18 @@
       "spd": 92,
       "spe": 58
     },
-    "abilities": [],
-    "hiddenAbilities": [],
+    "abilities": [
+      {
+        "name": "フリーズスキン",
+        "description": "自分の『ノーマル』タイプの技が『こおり』タイプになり、さらに威力が1.2倍になる。(第6世代は1.3倍)"
+      }
+    ],
+    "hiddenAbilities": [
+      {
+        "name": "*ゆきふらし",
+        "description": "戦闘に出ると5ターンの間、天気が『ゆき』になる。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n699.gif",
     "imagePath": "images/n699.png",
     "analysis": {
@@ -490,10 +587,24 @@
       "spd": 46,
       "spe": 28
     },
-    "abilities": [],
-    "hiddenAbilities": [],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n713h.gif",
-    "imagePath": "images/n713h.png",
+    "abilities": [
+      {
+        "name": "マイペース",
+        "description": "『こんらん』状態にならない。第8世代からは、相手の特性『いかく』の効果も受けない。"
+      },
+      {
+        "name": "アイスボディ",
+        "description": "天気が『ゆき』の時、毎ターン終了時にHPが最大HPの1/16回復する。"
+      }
+    ],
+    "hiddenAbilities": [
+      {
+        "name": "*がんじょう",
+        "description": "HPが最大の時、『ひんし』状態になるダメージを受けても必ず1残る。また、一撃で『ひんし』になる技『じわれ』『ぜったいれいど』『つのドリル』『ハサミギロチン』を受けない。"
+      }
+    ],
+    "imageUrl": "https://img.yakkun.com/poke/icon96/n713.gif",
+    "imagePath": "images/n713.png",
     "analysis": {
       "topKills": [],
       "switchIn": []
@@ -522,8 +633,22 @@
       "spd": 36,
       "spe": 38
     },
-    "abilities": [],
-    "hiddenAbilities": [],
+    "abilities": [
+      {
+        "name": "がんじょうあご",
+        "description": "あごやキバを使って攻撃する噛み技『かみつく』『かみくだく』『ひっさつまえば』『ほのおのキバ』『かみなりのキバ』『こおりのキバ』『どくどくのキバ』『サイコファング』『エラがみ』『くらいつく』の威力が1.5倍になる。"
+      },
+      {
+        "name": "アイスボディ",
+        "description": "天気が『ゆき』の時、毎ターン終了時にHPが最大HPの1/16回復する。"
+      }
+    ],
+    "hiddenAbilities": [
+      {
+        "name": "*がんじょう",
+        "description": "HPが最大の時、『ひんし』状態になるダメージを受けても必ず1残る。また、一撃で『ひんし』になる技『じわれ』『ぜったいれいど』『つのドリル』『ハサミギロチン』を受けない。"
+      }
+    ],
     "analysis": {
       "topKills": [],
       "switchIn": []
@@ -546,8 +671,22 @@
       "spd": 67,
       "spe": 43
     },
-    "abilities": [],
-    "hiddenAbilities": [],
+    "abilities": [
+      {
+        "name": "かいりきバサミ",
+        "description": "相手の技や特性で『こうげき』ランクが下がらない。"
+      },
+      {
+        "name": "てつのこぶし",
+        "description": "パンチ系の技『アイスハンマー』『アームハンマー』『かみなりパンチ』『きあいパンチ』『グロウパンチ』『コメットパンチ』『シャドーパンチ』『スカイアッパー』『ドレインパンチ』『ばくれつパンチ』『バレットパンチ』『ピヨピヨパンチ』『プラズマフィスト』『ほのおのパンチ』『マッハパンチ』『メガトンパンチ』『れいとうパンチ』『れんぞくパンチ』『ダブルパンツァー』『あんこくきょうだ』『すいりゅうれんだ』『ぶちかまし』『ジェットパンチ』『ふんどのこぶし』の威力が1.2倍になる。"
+      }
+    ],
+    "hiddenAbilities": [
+      {
+        "name": "*いかりのつぼ",
+        "description": "自分への攻撃が急所に当たると、『こうげき』ランクが最大まで上がる。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n740.gif",
     "imagePath": "images/n740.png",
     "analysis": {
@@ -574,7 +713,12 @@
       "spd": 107,
       "spe": 33
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "name": "てつのこぶし",
+        "description": "パンチ系の技『アイスハンマー』『アームハンマー』『かみなりパンチ』『きあいパンチ』『グロウパンチ』『コメットパンチ』『シャドーパンチ』『スカイアッパー』『ドレインパンチ』『ばくれつパンチ』『バレットパンチ』『ピヨピヨパンチ』『プラズマフィスト』『ほのおのパンチ』『マッハパンチ』『メガトンパンチ』『れいとうパンチ』『れんぞくパンチ』『ダブルパンツァー』『あんこくきょうだ』『すいりゅうれんだ』『ぶちかまし』『ジェットパンチ』『ふんどのこぶし』の威力が1.2倍になる。"
+      }
+    ],
     "hiddenAbilities": [],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n740m.gif",
     "imagePath": "images/n740m.png",
@@ -602,8 +746,22 @@
       "spd": 100,
       "spe": 70
     },
-    "abilities": [],
-    "hiddenAbilities": [],
+    "abilities": [
+      {
+        "name": "ちどりあし",
+        "description": "『こんらん』状態の時、回避率が2倍に上がる。"
+      },
+      {
+        "name": "バリアフリー",
+        "description": "戦闘に出た時、お互いの場の『ひかりのかべ』『リフレクター』『オーロラベール』の状態を解除する。"
+      }
+    ],
+    "hiddenAbilities": [
+      {
+        "name": "*アイスボディ",
+        "description": "天気が『ゆき』の時、毎ターン終了時にHPが最大HPの1/16回復する。"
+      }
+    ],
     "imageUrl": "https://img.yakkun.com/poke/icon96/n866.gif",
     "imagePath": "images/n866.png",
     "analysis": {

@@ -164,6 +164,40 @@ async function scrape() {
         pokemon.stats[key] = Number(statText.match(regex)?.[1] ?? 0);
       }
 
+      const abilityLinks = [
+        ...document.querySelectorAll(
+          "a[href*='tokusei=']"
+        )
+      ];
+
+      for (const link of abilityLinks) {
+        const tr = link.closest("tr");
+        if (!tr) continue;
+
+        const cells = tr.querySelectorAll("td");
+
+        const ability = {
+          name: link.innerText.trim(),
+          description:
+            cells[1]?.innerText
+              .replace(/\s+/g, " ")
+              .trim() ?? ""
+        };
+
+        // 夢特性判定
+        const prevText =
+          tr.previousElementSibling?.innerText ?? "";
+
+        if (
+          prevText.includes("隠れ") ||
+          prevText.includes("夢")
+        ) {
+          pokemon.hiddenAbilities.push(ability);
+        } else {
+          pokemon.abilities.push(ability);
+        }
+      }
+
       return pokemon;
     });
 
@@ -193,8 +227,15 @@ async function scrape() {
           spd: 0,
           spe: 0
         },
-      abilities: old?.abilities || [],
-      hiddenAbilities: old?.hiddenAbilities || [],
+      abilities:
+        pokemon.abilities.length > 0
+          ? pokemon.abilities
+          : old?.abilities || [],
+
+      hiddenAbilities:
+        pokemon.hiddenAbilities.length > 0
+          ? pokemon.hiddenAbilities
+          : old?.hiddenAbilities || [],
       analysis: old?.analysis || {
         topKills: [],
         switchIn: []
@@ -209,13 +250,18 @@ async function scrape() {
       category: merged.category,
       height: merged.height,
       weight: merged.weight,
-      stats: merged.stats
+      stats: merged.stats,
+      abilities: merged.abilities,
+      hiddenAbilities: merged.hiddenAbilities
     });
 
     console.log(`${merged.name} 更新完了`);
   }
 
-  const mergedPokemon = uniqueById(scrapedPokemon);
+  const mergedPokemon = uniqueById([
+    ...oldPokemon,
+    ...scrapedPokemon
+  ]);
 
   fs.writeFileSync(
     "./data/pokemon.json",
