@@ -14,22 +14,23 @@ let moveSortState = {
   direction: "desc"
 };
 
-// 種族値の表示名とJSON内のキー
 const STAT_LIST = [
   { label: "HP", keys: ["HP", "hp"] },
   { label: "攻", keys: ["攻撃", "atk"] },
   { label: "防", keys: ["防御", "def"] },
   { label: "特攻", keys: ["特攻", "spa"] },
   { label: "特防", keys: ["特防", "spd"] },
-  { label: "素早さ", keys: ["素早さ", "素早", "spe"] }
+  {
+    label: "素早さ",
+    keys: ["素早さ", "素早", "spe"]
+  }
 ];
 
 // ==============================
 // メイン処理
 // ==============================
 
-// JSONを読み込む
-fetch("./data/pokemon.json?ver=3")
+fetch("./data/pokemon.json?ver=4")
   .then(response => {
     if (!response.ok) {
       throw new Error(
@@ -46,14 +47,18 @@ fetch("./data/pokemon.json?ver=3")
       );
     }
 
-    allPokemon = data.filter(isValidPokemon);
+    allPokemon =
+      data.filter(isValidPokemon);
+
     displayPokemon(allPokemon);
   })
   .catch(error => {
     console.error(error);
 
     const list =
-      document.getElementById("pokemon-list");
+      document.getElementById(
+        "pokemon-list"
+      );
 
     if (list) {
       list.innerHTML = `
@@ -66,22 +71,21 @@ fetch("./data/pokemon.json?ver=3")
   });
 
 // ==============================
-// ポケモン一覧表示
+// ポケモン一覧
 // ==============================
 
-// ポケモン一覧をカード形式で表示する
 function displayPokemon(pokemonList) {
   const list =
-    document.getElementById("pokemon-list");
-
-  const result =
-    document.getElementById("result");
-
-  if (!list) {
-    console.error(
-      "#pokemon-list が見つかりません。"
+    document.getElementById(
+      "pokemon-list"
     );
 
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+  if (!list) {
     return;
   }
 
@@ -133,24 +137,31 @@ function displayPokemon(pokemonList) {
       </p>
     `;
 
-    card.addEventListener("click", () => {
-      showPokemon(pokemon, card);
-    });
+    card.addEventListener(
+      "click",
+      () => {
+        showPokemon(
+          pokemon,
+          card
+        );
+      }
+    );
 
     list.appendChild(card);
   });
 }
 
-// カードクリック時に詳細欄を表示する
+// ==============================
+// 詳細表示
+// ==============================
+
 function showPokemon(pokemon, card) {
   const result =
-    document.getElementById("result");
-
-  if (!result) {
-    console.error(
-      "#result が見つかりません。"
+    document.getElementById(
+      "result"
     );
 
+  if (!result) {
     return;
   }
 
@@ -159,7 +170,6 @@ function showPokemon(pokemon, card) {
 
   clearSelectedCard();
 
-  // 同じカードを再クリックしたら閉じる
   if (isSamePokemon) {
     result.innerHTML = "";
     selectedPokemon = null;
@@ -184,11 +194,38 @@ function showPokemon(pokemon, card) {
   result.innerHTML = `
     <div class="result-box">
       <div class="result-header">
-        <img
-          src="${getImage(pokemon)}"
-          class="pokemon-image"
-          alt="${pokemon.name}"
-        >
+        <div class="pokemon-images">
+          <div class="pokemon-image-item">
+            <span class="pokemon-image-label">
+              通常色
+            </span>
+
+            <img
+              src="${getImage(pokemon)}"
+              class="pokemon-image"
+              alt="${pokemon.name} 通常色"
+            >
+          </div>
+
+          ${getShinyImage(pokemon)
+      ? `
+                <div class="pokemon-image-item">
+                  <span
+                    class="pokemon-image-label shiny-label"
+                  >
+                    色違い
+                  </span>
+
+                  <img
+                    src="${getShinyImage(pokemon)}"
+                    class="pokemon-image shiny-image"
+                    alt="${pokemon.name} 色違い"
+                  >
+                </div>
+              `
+      : ""
+    }
+        </div>
 
         <div class="result-title-area">
           <h2>${pokemon.name}</h2>
@@ -233,40 +270,37 @@ function showPokemon(pokemon, card) {
 }
 
 // ==============================
-// ポケモンのソート・フィルター
+// ポケモン一覧ソート
 // ==============================
 
-// HP順
 function sortByHp() {
   sortByStat(["HP", "hp"]);
 }
 
-// 攻撃順
 function sortByAtk() {
   sortByStat(["攻撃", "atk"]);
 }
 
-// 防御順
 function sortByDefense() {
   sortByStat(["防御", "def"]);
 }
 
-// 特攻順
 function sortBySpAtk() {
   sortByStat(["特攻", "spa"]);
 }
 
-// 特防順
 function sortBySpDefense() {
   sortByStat(["特防", "spd"]);
 }
 
-// 素早さ順
 function sortBySpeed() {
-  sortByStat(["素早さ", "素早", "spe"]);
+  sortByStat([
+    "素早さ",
+    "素早",
+    "spe"
+  ]);
 }
 
-// メガシンカだけ表示
 function showMegaOnly() {
   const filtered =
     allPokemon.filter(pokemon =>
@@ -276,30 +310,25 @@ function showMegaOnly() {
   displayPokemon(filtered);
 }
 
-// 全ポケモンを表示
 function showAllPokemon() {
   displayPokemon(allPokemon);
 }
 
-// 指定した種族値で降順ソート
 function sortByStat(keys) {
   const sorted = [...allPokemon];
 
-  sorted.sort((a, b) => {
-    return (
-      getStat(b, keys) -
-      getStat(a, keys)
-    );
-  });
+  sorted.sort((a, b) =>
+    getStat(b, keys) -
+    getStat(a, keys)
+  );
 
   displayPokemon(sorted);
 }
 
 // ==============================
-// カード用HTML生成
+// カードHTML
 // ==============================
 
-// カードのタイプ表示
 function createCardTypeHtml(pokemon) {
   const types =
     Array.isArray(pokemon.types)
@@ -313,7 +342,9 @@ function createCardTypeHtml(pokemon) {
   return `
     <div class="card-types">
       ${types.map(type => `
-        <span class="type-badge type-${type}">
+        <span
+          class="type-badge type-${type}"
+        >
           ${type}
         </span>
       `).join("")}
@@ -321,11 +352,13 @@ function createCardTypeHtml(pokemon) {
   `;
 }
 
-// カード内のランク表示
 function createRankHtml(pokemon) {
   return STAT_LIST.map(stat => {
     const value =
-      getStat(pokemon, stat.keys);
+      getStat(
+        pokemon,
+        stat.keys
+      );
 
     return `
       <span class="rank-item">
@@ -333,7 +366,9 @@ function createRankHtml(pokemon) {
           ${stat.label}
         </span>
 
-        <span class="${getRankClass(value)}">
+        <span
+          class="${getRankClass(value)}"
+        >
           ${getRank(value)}
         </span>
       </span>
@@ -342,10 +377,9 @@ function createRankHtml(pokemon) {
 }
 
 // ==============================
-// 詳細欄HTML生成
+// 詳細HTML
 // ==============================
 
-// 詳細欄のタイプバッジ
 function createTypeBadgesHtml(pokemon) {
   const types =
     Array.isArray(pokemon.types)
@@ -359,7 +393,9 @@ function createTypeBadgesHtml(pokemon) {
   return `
     <div class="type-badges">
       ${types.map(type => `
-        <span class="type-badge type-${type}">
+        <span
+          class="type-badge type-${type}"
+        >
           ${type}
         </span>
       `).join("")}
@@ -367,7 +403,6 @@ function createTypeBadgesHtml(pokemon) {
   `;
 }
 
-// 基本情報
 function createBasicInfoHtml(pokemon) {
   const hasHeight =
     pokemon.height !== undefined &&
@@ -418,17 +453,19 @@ function createBasicInfoHtml(pokemon) {
   `;
 }
 
-// 種族値バー
 function createStatsBarHtml(pokemon) {
   return `
     <div class="stats-list">
       ${STAT_LIST.map(stat => {
     const value =
-      getStat(pokemon, stat.keys);
+      getStat(
+        pokemon,
+        stat.keys
+      );
 
     const width =
       Math.min(
-        (value / 200) * 100,
+        value / 200 * 100,
         100
       );
 
@@ -463,13 +500,16 @@ function createStatsBarHtml(pokemon) {
   `;
 }
 
-// 特性一覧
 function createAbilitiesHtml(pokemon) {
   const abilities =
-    normalizeAbilities(pokemon.abilities);
+    normalizeAbilities(
+      pokemon.abilities
+    );
 
   const hiddenAbilities =
-    getHiddenAbilities(pokemon);
+    getHiddenAbilities(
+      pokemon
+    );
 
   if (
     abilities.length === 0 &&
@@ -490,9 +530,7 @@ function createAbilitiesHtml(pokemon) {
             通常特性
           </span>
 
-          <span>
-            ${ability}
-          </span>
+          <span>${ability}</span>
         </li>
       `).join("")}
 
@@ -504,16 +542,13 @@ function createAbilitiesHtml(pokemon) {
             夢特性
           </span>
 
-          <span>
-            ${ability}
-          </span>
+          <span>${ability}</span>
         </li>
       `).join("")}
     </ul>
   `;
 }
 
-// メモ
 function createMemoHtml(pokemon) {
   if (!pokemon.memo) {
     return "";
@@ -536,7 +571,6 @@ function createMemoHtml(pokemon) {
 // 技一覧
 // ==============================
 
-// 覚える技一覧
 function renderMoves(pokemon) {
   const originalMoves =
     Array.isArray(pokemon.moves)
@@ -731,20 +765,23 @@ function renderMoves(pokemon) {
             ${moves.length > 0
       ? moves.map(move => {
         const moveName =
-          move.name || "—";
+          move.name ||
+          "—";
 
         const moveType =
-          move.type || "不明";
+          move.type ||
+          "不明";
 
-        const moveCategory =
-          move.category || "";
+        const category =
+          move.category ||
+          "";
 
-        const movePower =
+        const power =
           formatMoveValue(
             move.power
           );
 
-        const moveAccuracy =
+        const accuracy =
           formatMoveValue(
             move.accuracy
           );
@@ -778,17 +815,15 @@ function renderMoves(pokemon) {
 
                         <td
                           class="move-category"
-                          title="${moveCategory ||
-          "分類不明"
-          }"
+                          title="${category || "分類不明"}"
                         >
                           ${getMoveCategorySymbol(
-            moveCategory
+            category
           )}
                         </td>
 
                         <td class="move-number">
-                          ${movePower}
+                          ${power}
                         </td>
 
                         <td
@@ -797,7 +832,7 @@ function renderMoves(pokemon) {
             : ""
           }"
                         >
-                          ${moveAccuracy}
+                          ${accuracy}
                         </td>
                       </tr>
                     `;
@@ -818,50 +853,41 @@ function renderMoves(pokemon) {
       </div>
 
       <div class="move-symbol-guide">
-        <span>
-          <strong>★</strong>
-          物理
-        </span>
-
-        <span>
-          <strong>◎</strong>
-          特殊
-        </span>
-
-        <span>
-          <strong>－</strong>
-          変化技
-        </span>
+        <span><strong>★</strong> 物理</span>
+        <span><strong>◎</strong> 特殊</span>
+        <span><strong>－</strong> 変化技</span>
       </div>
     </section>
   `;
 }
 
 // ==============================
-// 技の絞り込み
+// 技絞り込み
 // ==============================
 
-// 条件に一致する技だけ返す
 function filterMoves(moves) {
   return moves.filter(move => {
-    const moveType =
-      String(move.type || "").trim();
+    const type =
+      String(
+        move.type || ""
+      ).trim();
 
-    const moveCategory =
+    const category =
       normalizeMoveCategory(
         move.category
       );
 
     if (
       moveTypeFilter &&
-      moveType !== moveTypeFilter
+      type !== moveTypeFilter
     ) {
       return false;
     }
 
     if (
       moveCategoryFilter &&
-      moveCategory !== moveCategoryFilter
+      category !==
+      moveCategoryFilter
     ) {
       return false;
     }
@@ -870,21 +896,18 @@ function filterMoves(moves) {
   });
 }
 
-// 技タイプを変更
 function changeMoveTypeFilter(value) {
   moveTypeFilter = value;
-
   refreshMovesSection();
 }
 
-// 分類を変更
-function changeMoveCategoryFilter(value) {
+function changeMoveCategoryFilter(
+  value
+) {
   moveCategoryFilter = value;
-
   refreshMovesSection();
 }
 
-// 技の絞り込みを解除
 function clearMoveFilters() {
   moveTypeFilter = "";
   moveCategoryFilter = "";
@@ -892,12 +915,13 @@ function clearMoveFilters() {
   refreshMovesSection();
 }
 
-// 技一覧に存在するタイプを取得
 function getMoveTypes(moves) {
   const types =
     moves
       .map(move =>
-        String(move.type || "").trim()
+        String(
+          move.type || ""
+        ).trim()
       )
       .filter(Boolean);
 
@@ -905,19 +929,18 @@ function getMoveTypes(moves) {
     .sort((a, b) =>
       a.localeCompare(
         b,
-        "ja",
-        {
-          numeric: true,
-          sensitivity: "base"
-        }
+        "ja"
       )
     );
 }
 
-// 分類名を統一
-function normalizeMoveCategory(category) {
+function normalizeMoveCategory(
+  category
+) {
   const value =
-    String(category || "").trim();
+    String(
+      category || ""
+    ).trim();
 
   if (value.includes("物理")) {
     return "物理";
@@ -935,13 +958,15 @@ function normalizeMoveCategory(category) {
 }
 
 // ==============================
-// 技一覧の再描画
+// 技一覧更新
 // ==============================
 
 function refreshMovesSection() {
   const pokemon =
-    allPokemon.find(item =>
-      item.name === selectedPokemon
+    allPokemon.find(
+      item =>
+        item.name ===
+        selectedPokemon
     );
 
   if (!pokemon) {
@@ -962,14 +987,16 @@ function refreshMovesSection() {
 }
 
 // ==============================
-// 技一覧のソート
+// 技ソート
 // ==============================
 
-// 見出しクリック時の処理
 function sortMoves(key) {
-  if (moveSortState.key === key) {
+  if (
+    moveSortState.key === key
+  ) {
     moveSortState.direction =
-      moveSortState.direction === "asc"
+      moveSortState.direction ===
+        "asc"
         ? "desc"
         : "asc";
   } else {
@@ -985,7 +1012,6 @@ function sortMoves(key) {
   refreshMovesSection();
 }
 
-// 技一覧を並び替える
 function sortMovesList(
   moves,
   key,
@@ -1041,19 +1067,21 @@ function sortMovesList(
   return sorted;
 }
 
-// 威力・命中の数値比較
 function compareMoveNumbers(
   valueA,
   valueB,
   direction
 ) {
   const numberA =
-    toSortableMoveNumber(valueA);
+    toSortableMoveNumber(
+      valueA
+    );
 
   const numberB =
-    toSortableMoveNumber(valueB);
+    toSortableMoveNumber(
+      valueB
+    );
 
-  // 数値がない技は常に一番下
   if (
     numberA === null &&
     numberB === null
@@ -1074,8 +1102,9 @@ function compareMoveNumbers(
     : numberB - numberA;
 }
 
-// ソート用の数値へ変換
-function toSortableMoveNumber(value) {
+function toSortableMoveNumber(
+  value
+) {
   if (
     value === undefined ||
     value === null ||
@@ -1089,43 +1118,45 @@ function toSortableMoveNumber(value) {
   const numberValue =
     Number(value);
 
-  return Number.isNaN(numberValue)
+  return Number.isNaN(
+    numberValue
+  )
     ? null
     : numberValue;
 }
 
-// 現在のソート方向
 function getMoveSortMark(key) {
-  if (moveSortState.key !== key) {
+  if (
+    moveSortState.key !== key
+  ) {
     return "";
   }
 
-  return moveSortState.direction === "asc"
+  return moveSortState.direction ===
+    "asc"
     ? " ▲"
     : " ▼";
 }
 
-// 技の分類を記号へ変換
-function getMoveCategorySymbol(category) {
-  const normalizedCategory =
-    normalizeMoveCategory(category);
+function getMoveCategorySymbol(
+  category
+) {
+  const normalized =
+    normalizeMoveCategory(
+      category
+    );
 
-  if (normalizedCategory === "物理") {
+  if (normalized === "物理") {
     return "★";
   }
 
-  if (normalizedCategory === "特殊") {
+  if (normalized === "特殊") {
     return "◎";
-  }
-
-  if (normalizedCategory === "変化") {
-    return "－";
   }
 
   return "－";
 }
 
-// 威力・命中の表示調整
 function formatMoveValue(value) {
   if (
     value === undefined ||
@@ -1140,20 +1171,31 @@ function formatMoveValue(value) {
 }
 
 // ==============================
-// データ取得・整形
+// 画像
 // ==============================
 
-// 画像パスを取得
 function getImage(pokemon) {
   return (
-    pokemon.imageUrl ||
     pokemon.imagePath ||
     pokemon.image ||
+    pokemon.imageUrl ||
     ""
   );
 }
 
-// 種族値を数値として取得
+function getShinyImage(pokemon) {
+  return (
+    pokemon.shinyImagePath ||
+    pokemon.shinyImage ||
+    pokemon.shinyImageUrl ||
+    ""
+  );
+}
+
+// ==============================
+// データ整形
+// ==============================
+
 function getStat(pokemon, keys) {
   const keyList =
     Array.isArray(keys)
@@ -1172,7 +1214,9 @@ function getStat(pokemon, keys) {
       const numberValue =
         Number(value);
 
-      return Number.isNaN(numberValue)
+      return Number.isNaN(
+        numberValue
+      )
         ? 0
         : numberValue;
     }
@@ -1181,8 +1225,9 @@ function getStat(pokemon, keys) {
   return 0;
 }
 
-// 通常特性を文字列配列へ統一
-function normalizeAbilities(abilities) {
+function normalizeAbilities(
+  abilities
+) {
   if (!Array.isArray(abilities)) {
     return [];
   }
@@ -1190,21 +1235,15 @@ function normalizeAbilities(abilities) {
   return abilities
     .map(ability => {
       if (
-        typeof ability === "string"
+        typeof ability ===
+        "string"
       ) {
         return ability.trim();
       }
 
-      if (
-        ability &&
-        typeof ability === "object"
-      ) {
-        return String(
-          ability.name || ""
-        ).trim();
-      }
-
-      return "";
+      return String(
+        ability?.name || ""
+      ).trim();
     })
     .filter(name =>
       name &&
@@ -1212,16 +1251,17 @@ function normalizeAbilities(abilities) {
     );
 }
 
-// 夢特性を配列で取得
-function getHiddenAbilities(pokemon) {
-  const hiddenAbilities = [];
+function getHiddenAbilities(
+  pokemon
+) {
+  const result = [];
 
   if (
     typeof pokemon.hiddenAbility ===
     "string" &&
     pokemon.hiddenAbility.trim()
   ) {
-    hiddenAbilities.push(
+    result.push(
       pokemon.hiddenAbility.trim()
     );
   }
@@ -1231,43 +1271,30 @@ function getHiddenAbilities(pokemon) {
       pokemon.hiddenAbilities
     )
   ) {
-    pokemon.hiddenAbilities.forEach(
-      ability => {
-        let abilityName = "";
+    for (
+      const ability
+      of pokemon.hiddenAbilities
+    ) {
+      const name =
+        typeof ability ===
+          "string"
+          ? ability.trim()
+          : String(
+            ability?.name || ""
+          ).trim();
 
-        if (
-          typeof ability === "string"
-        ) {
-          abilityName =
-            ability.trim();
-        } else if (
-          ability &&
-          typeof ability === "object"
-        ) {
-          abilityName =
-            String(
-              ability.name || ""
-            ).trim();
-        }
-
-        if (
-          abilityName &&
-          !isNonAbilityData(
-            abilityName
-          )
-        ) {
-          hiddenAbilities.push(
-            abilityName
-          );
-        }
+      if (
+        name &&
+        !isNonAbilityData(name)
+      ) {
+        result.push(name);
       }
-    );
+    }
   }
 
-  return [...new Set(hiddenAbilities)];
+  return [...new Set(result)];
 }
 
-// 特性ではない混入データ
 function isNonAbilityData(name) {
   return [
     "通常色",
@@ -1281,7 +1308,6 @@ function isNonAbilityData(name) {
   ].includes(name);
 }
 
-// 表示に必要なデータがあるか判定
 function isValidPokemon(pokemon) {
   return Boolean(
     pokemon &&
@@ -1294,7 +1320,6 @@ function isValidPokemon(pokemon) {
 // UI補助
 // ==============================
 
-// 選択中カードを解除
 function clearSelectedCard() {
   if (selectedCard) {
     selectedCard.classList.remove(
@@ -1304,24 +1329,36 @@ function clearSelectedCard() {
 }
 
 // ==============================
-// ランク判定
+// ランク
 // ==============================
 
-// 種族値からランク文字を返す
 function getRank(value) {
   const numberValue =
     Number(value);
 
-  if (numberValue >= 120) return "S";
-  if (numberValue >= 100) return "A";
-  if (numberValue >= 80) return "B";
-  if (numberValue >= 60) return "C";
-  if (numberValue >= 40) return "D";
+  if (numberValue >= 120) {
+    return "S";
+  }
+
+  if (numberValue >= 100) {
+    return "A";
+  }
+
+  if (numberValue >= 80) {
+    return "B";
+  }
+
+  if (numberValue >= 60) {
+    return "C";
+  }
+
+  if (numberValue >= 40) {
+    return "D";
+  }
 
   return "E";
 }
 
-// 種族値からCSSクラス名を返す
 function getRankClass(value) {
   const rank =
     getRank(value);

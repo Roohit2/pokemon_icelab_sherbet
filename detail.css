@@ -26,6 +26,45 @@
   background: #10283f;
 }
 
+/* ==============================
+   通常色・色違い画像
+============================== */
+
+.pokemon-images {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  flex: 0 0 auto;
+}
+
+.pokemon-image-item {
+  display: grid;
+  gap: 7px;
+  justify-items: center;
+}
+
+.pokemon-image-label {
+  min-width: 70px;
+  padding: 4px 9px;
+  color: #dff7ff;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid #5f8da8;
+  background: #173d5d;
+}
+
+.shiny-label {
+  color: #fff5b8;
+  border-color: #d5b94f;
+  background: #594a17;
+}
+
+.shiny-image {
+  filter:
+    drop-shadow(0 0 9px rgba(255, 226, 92, 0.32));
+}
+
 .pokemon-image {
   width: 160px;
   height: 160px;
@@ -246,9 +285,14 @@
     text-align: center;
   }
 
+  .pokemon-images {
+    justify-content: center;
+    width: 100%;
+  }
+
   .pokemon-image {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
   }
 
   .type-badges {

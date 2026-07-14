@@ -7,7 +7,7 @@
     "category": "きつねポケモン",
     "height": "1.1m",
     "weight": "19.9kg",
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n38a.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n38a.png",
     "imagePath": "images/n38a.png",
     "types": [
       "こおり"
@@ -589,7 +589,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n38a.png"
+    "image": "images/n38a.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n38a_s.png",
+    "shinyImagePath": "images/n38a_s.png",
+    "shinyImage": "images/n38a_s.png"
   },
   {
     "id": 351105,
@@ -599,7 +602,7 @@
     "category": "てんきポケモン",
     "height": "0.3m",
     "weight": "0.8kg",
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n351.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n351.png",
     "imagePath": "images/n351.png",
     "types": [
       "こおり"
@@ -969,7 +972,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n351.png"
+    "image": "images/n351.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n351_s.png",
+    "shinyImagePath": "images/n351_s.png",
+    "shinyImage": "images/n351_s.png"
   },
   {
     "id": 362,
@@ -1009,7 +1015,7 @@
         "description": "毎ターン終了時、『こうげき』『ぼうぎょ』『とくこう』『とくぼう』『すばやさ』いずれかのランクが2段階上がり、別のランクが1段階下がる。(第7世代までは『回避率』『命中率』も含まれていた)"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n362.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n362.png",
     "imagePath": "images/n362.png",
     "no": "362",
     "moves": [
@@ -1449,7 +1455,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n362.png"
+    "image": "images/n362.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n362_s.png",
+    "shinyImagePath": "images/n362_s.png",
+    "shinyImage": "images/n362_s.png"
   },
   {
     "id": 3621,
@@ -1480,7 +1489,7 @@
     "height": "2.1m",
     "weight": "350.2kg",
     "hiddenAbilities": [],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n362m.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n362m.png",
     "imagePath": "images/n362m.png",
     "no": "362",
     "moves": [
@@ -1920,7 +1929,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n362m.png"
+    "image": "images/n362m.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n362m_s.png",
+    "shinyImagePath": "images/n362m_s.png",
+    "shinyImage": "images/n362m_s.png"
   },
   {
     "id": 460,
@@ -1957,7 +1969,7 @@
         "description": "音系の技『いにしえのうた』『いびき』『いやしのすず』『いやなおと』『うたう』『うたかたのアリア』『エコーボイス』『おしゃべり』『おたけび』『きんぞくおん』『くさぶえ』『さわぐ』『スケイルノイズ』『すてゼリフ』『チャームボイス』『ちょうおんぱ』『とおぼえ』『ないしょばなし』『なきごえ』『バークアウト』『ハイパーボイス』『ばくおんぱ』『ほえる』『ほろびのうた』『むしのさざめき』『りんしょう』『ブレイジングソウルビート』『オーバードライブ』『ぶきみなじゅもん』『フレアソング』『みわくのボイス』『サイコノイズ』を受けない。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n460.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n460.png",
     "imagePath": "images/n460.png",
     "no": "460",
     "moves": [
@@ -2488,7 +2500,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n460.png"
+    "image": "images/n460.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n460_s.png",
+    "shinyImagePath": "images/n460_s.png",
+    "shinyImage": "images/n460_s.png"
   },
   {
     "id": 4601,
@@ -2520,7 +2535,7 @@
     "height": "2.7m",
     "weight": "185.0kg",
     "hiddenAbilities": [],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n460m.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n460m.png",
     "imagePath": "images/n460m.png",
     "no": "460",
     "moves": [
@@ -3051,7 +3066,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n460m.png"
+    "image": "images/n460m.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n460m_s.png",
+    "shinyImagePath": "images/n460m_s.png",
+    "shinyImage": "images/n460m_s.png"
   },
   {
     "id": 461,
@@ -3088,7 +3106,7 @@
         "description": "接触技(直接攻撃)を受けた時、自分が道具を持っていなければ、相手の持っている道具を奪う。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n461.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n461.png",
     "imagePath": "images/n461.png",
     "no": "461",
     "moves": [
@@ -3696,13 +3714,16 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n461.png"
+    "image": "images/n461.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n461_s.png",
+    "shinyImagePath": "images/n461_s.png",
+    "shinyImage": "images/n461_s.png"
   },
   {
     "id": 471,
     "name": "グレイシア",
     "category": "しんせつポケモン",
-    "image": "images/glaceon.png",
+    "image": "images/n471.png",
     "types": [
       "こおり"
     ],
@@ -3733,7 +3754,7 @@
         "description": "天気が『ゆき』の時、毎ターン終了時にHPが最大HPの1/16回復する。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n471.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n471.png",
     "imagePath": "images/n471.png",
     "no": "471",
     "moves": [
@@ -4221,7 +4242,10 @@
         "accuracy": 90
       }
     ],
-    "recommendedMovesets": []
+    "recommendedMovesets": [],
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n471_s.png",
+    "shinyImagePath": "images/n471_s.png",
+    "shinyImage": "images/n471_s.png"
   },
   {
     "id": 473,
@@ -4262,7 +4286,7 @@
         "description": "『ほのお』『こおり』タイプの技を受けた時、ダメージが半減する。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n473.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n473.png",
     "imagePath": "images/n473.png",
     "no": "473",
     "moves": [
@@ -4758,7 +4782,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n473.png"
+    "image": "images/n473.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n473_s.png",
+    "shinyImagePath": "images/n473_s.png",
+    "shinyImage": "images/n473_s.png"
   },
   {
     "id": 478,
@@ -4795,7 +4822,7 @@
         "description": "相手から技を受けた時、30%の確率で3ターンの間、その相手の技を『かなしばり』状態にする。技が無効化された場合や、自分が『みがわり』状態の場合は発動しない。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n478.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n478.png",
     "imagePath": "images/n478.png",
     "no": "478",
     "moves": [
@@ -5354,7 +5381,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n478.png"
+    "image": "images/n478.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n478_s.png",
+    "shinyImagePath": "images/n478_s.png",
+    "shinyImage": "images/n478_s.png"
   },
   {
     "name": "メガユキメノコ",
@@ -5380,7 +5410,7 @@
       }
     ],
     "hiddenAbilities": [],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n478m.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n478m.png",
     "imagePath": "images/n478m.png",
     "analysis": {
       "topKills": [],
@@ -5944,7 +5974,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n478m.png"
+    "image": "images/n478m.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n478m_s.png",
+    "shinyImagePath": "images/n478m_s.png",
+    "shinyImage": "images/n478m_s.png"
   },
   {
     "id": 479102,
@@ -5954,7 +5987,7 @@
     "category": "プラズマポケモン",
     "height": "0.3m",
     "weight": "0.3kg",
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n479f.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n479f.png",
     "imagePath": "images/n479f.png",
     "types": [
       "こおり"
@@ -6373,7 +6406,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n479f.png"
+    "image": "images/n479f.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n479f_s.png",
+    "shinyImagePath": "images/n479f_s.png",
+    "shinyImage": "images/n479f_s.png"
   },
   {
     "name": "バイバニラ",
@@ -6408,7 +6444,7 @@
         "description": "物理技を受けると、『ぼうぎょ』ランクが1段階下がり、『すばやさ』ランクが2段階上がる。(第6世代は1段階)"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n584.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n584.png",
     "imagePath": "images/n584.png",
     "analysis": {
       "topKills": [],
@@ -6734,7 +6770,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n584.png"
+    "image": "images/n584.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n584_s.png",
+    "shinyImagePath": "images/n584_s.png",
+    "shinyImage": "images/n584_s.png"
   },
   {
     "name": "ツンベアー",
@@ -6769,7 +6808,7 @@
         "description": "天気が『あめ』の時、『すばやさ』が2倍になる。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n614.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n614.png",
     "imagePath": "images/n614.png",
     "analysis": {
       "topKills": [],
@@ -7333,7 +7372,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n614.png"
+    "image": "images/n614.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n614_s.png",
+    "shinyImagePath": "images/n614_s.png",
+    "shinyImage": "images/n614_s.png"
   },
   {
     "name": "アマルルガ",
@@ -7364,7 +7406,7 @@
         "description": "戦闘に出ると5ターンの間、天気が『ゆき』になる。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n699.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n699.png",
     "imagePath": "images/n699.png",
     "analysis": {
       "topKills": [],
@@ -7865,7 +7907,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n699.png"
+    "image": "images/n699.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n699_s.png",
+    "shinyImagePath": "images/n699_s.png",
+    "shinyImage": "images/n699_s.png"
   },
   {
     "name": "クレベース",
@@ -7900,7 +7945,7 @@
         "description": "HPが最大の時、『ひんし』状態になるダメージを受けても必ず1残る。また、一撃で『ひんし』になる技『じわれ』『ぜったいれいど』『つのドリル』『ハサミギロチン』を受けない。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n713.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n713.png",
     "imagePath": "images/n713.png",
     "analysis": {
       "topKills": [],
@@ -8338,7 +8383,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n713.png"
+    "image": "images/n713.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n713_s.png",
+    "shinyImagePath": "images/n713_s.png",
+    "shinyImage": "images/n713_s.png"
   },
   {
     "id": 713104,
@@ -8348,7 +8396,7 @@
     "category": "ひょうざんポケモン",
     "height": "1.4m",
     "weight": "262.4kg",
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n713h.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n713h.png",
     "imagePath": "images/n713h.png",
     "types": [
       "こおり"
@@ -8846,7 +8894,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n713h.png"
+    "image": "images/n713h.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n713h_s.png",
+    "shinyImagePath": "images/n713h_s.png",
+    "shinyImage": "images/n713h_s.png"
   },
   {
     "name": "ケケンカニ",
@@ -8881,7 +8932,7 @@
         "description": "自分への攻撃が急所に当たると、『こうげき』ランクが最大まで上がる。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n740.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n740.png",
     "imagePath": "images/n740.png",
     "analysis": {
       "topKills": [],
@@ -9410,7 +9461,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n740.png"
+    "image": "images/n740.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n740_s.png",
+    "shinyImagePath": "images/n740_s.png",
+    "shinyImage": "images/n740_s.png"
   },
   {
     "name": "メガケケンカニ",
@@ -9436,7 +9490,7 @@
       }
     ],
     "hiddenAbilities": [],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n740m.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n740m.png",
     "imagePath": "images/n740m.png",
     "analysis": {
       "topKills": [],
@@ -9965,7 +10019,10 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n740m.png"
+    "image": "images/n740m.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n740m_s.png",
+    "shinyImagePath": "images/n740m_s.png",
+    "shinyImage": "images/n740m_s.png"
   },
   {
     "name": "バリコオル",
@@ -10000,7 +10057,7 @@
         "description": "天気が『ゆき』の時、毎ターン終了時にHPが最大HPの1/16回復する。"
       }
     ],
-    "imageUrl": "https://img.yakkun.com/poke/icon96/n866.gif",
+    "imageUrl": "https://img.yakkun.com/sprites/home/n866.png",
     "imagePath": "images/n866.png",
     "analysis": {
       "topKills": [],
@@ -10753,6 +10810,9 @@
       }
     ],
     "recommendedMovesets": [],
-    "image": "images/n866.png"
+    "image": "images/n866.png",
+    "shinyImageUrl": "https://img.yakkun.com/sprites/home/n866_s.png",
+    "shinyImagePath": "images/n866_s.png",
+    "shinyImage": "images/n866_s.png"
   }
 ]

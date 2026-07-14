@@ -1,10 +1,21 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+const path = require("path");
 
 const SEARCH_URL =
   "https://yakkun.com/ch/zukan/search/?type=14";
 
 const MAX_POKEMON = 999;
+
+const POKEMON_JSON_PATH = path.resolve(
+  __dirname,
+  "../data/pokemon.json"
+);
+
+const IMAGE_DIRECTORY = path.resolve(
+  __dirname,
+  "../images"
+);
 
 // ==================================================
 // URLからサイト内IDを作る
@@ -12,8 +23,9 @@ const MAX_POKEMON = 999;
 // メガ: 3621
 // ヒスイなど: 713104
 // ==================================================
+
 function getIdFromUrl(url) {
-  const match = url.match(
+  const match = String(url || "").match(
     /\/n(\d+)([a-z])?(?:$|[/?#])/
   );
 
@@ -41,6 +53,7 @@ function getIdFromUrl(url) {
 // ID重複を除去
 // 後から追加されたデータを優先
 // ==================================================
+
 function uniqueById(list = []) {
   const map = new Map();
 
@@ -61,6 +74,7 @@ function uniqueById(list = []) {
 // ==================================================
 // 特性の重複除去
 // ==================================================
+
 function uniqueAbilities(list = []) {
   const map = new Map();
 
@@ -96,6 +110,7 @@ function uniqueAbilities(list = []) {
 // ==================================================
 // 技の重複除去
 // ==================================================
+
 function uniqueMoves(list = []) {
   const map = new Map();
 
@@ -129,6 +144,7 @@ function uniqueMoves(list = []) {
 // ==================================================
 // フォーム違いのURL
 // ==================================================
+
 function buildYakkunUrl(pokemon) {
   const specialUrls = {
     38: "https://yakkun.com/ch/zukan/n38a",
@@ -151,31 +167,9 @@ function buildYakkunUrl(pokemon) {
 }
 
 // ==================================================
-// フォーム違いの画像パス
-// ==================================================
-function getLocalImagePath(
-  id,
-  scrapedImagePath,
-  oldImagePath
-) {
-  const specialImagePaths = {
-    38: "images/n38a.png",
-    3621: "images/n362m.png",
-    4601: "images/n460m.png",
-    713104: "images/n713h.png"
-  };
-
-  return (
-    specialImagePaths[id] ||
-    scrapedImagePath ||
-    oldImagePath ||
-    ""
-  );
-}
-
-// ==================================================
 // 分類の手動指定
 // ==================================================
+
 const knownCategories = {
   38: "きつねポケモン",
   351: "てんきポケモン",
@@ -192,26 +186,242 @@ const knownCategories = {
 };
 
 // ==================================================
-// メイン処理
+// 待機
 // ==================================================
-async function scrape() {
-  const pokemonJsonPath =
-    "./data/pokemon.json";
 
-  if (
-    !fs.existsSync(pokemonJsonPath)
-  ) {
+function sleep(milliseconds) {
+  return new Promise(resolve => {
+    setTimeout(resolve, milliseconds);
+  });
+}
+
+// ==================================================
+// MIMEタイプから拡張子を取得
+// ==================================================
+
+function getExtensionFromMimeType(mimeType) {
+  const normalized = String(
+    mimeType || ""
+  )
+    .split(";")[0]
+    .trim()
+    .toLowerCase();
+
+  const map = {
+    "image/png": ".png",
+    "image/jpeg": ".jpg",
+    "image/jpg": ".jpg",
+    "image/gif": ".gif",
+    "image/webp": ".webp",
+    "image/svg+xml": ".svg"
+  };
+
+  return map[normalized] || "";
+}
+
+// ==================================================
+// URLから拡張子を取得
+// ==================================================
+
+function getExtensionFromUrl(url) {
+  try {
+    const pathname =
+      new URL(url).pathname;
+
+    const extension =
+      path.extname(pathname)
+        .toLowerCase();
+
+    if (extension === ".jpeg") {
+      return ".jpg";
+    }
+
+    if (
+      [
+        ".png",
+        ".jpg",
+        ".gif",
+        ".webp",
+        ".svg"
+      ].includes(extension)
+    ) {
+      return extension;
+    }
+  } catch {
+    return "";
+  }
+
+  return "";
+}
+
+// ==================================================
+// URLから画像ファイル名を作る
+// ==================================================
+
+function getImageFileName(
+  imageUrl,
+  fallbackName
+) {
+  try {
+    const url = new URL(imageUrl);
+
+    const originalName =
+      path.basename(url.pathname);
+
+    if (originalName) {
+      return originalName;
+    }
+  } catch {
+    // fallbackNameを使用
+  }
+
+  return `${fallbackName}.png`;
+}
+
+// ==================================================
+// Node.js側で画像をダウンロード
+// ==================================================
+
+async function downloadImage(
+  imageUrl,
+  fallbackName
+) {
+  if (!imageUrl) {
+    return "";
+  }
+
+  fs.mkdirSync(
+    IMAGE_DIRECTORY,
+    {
+      recursive: true
+    }
+  );
+
+  const response = await fetch(imageUrl, {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+        "AppleWebKit/537.36 (KHTML, like Gecko) " +
+        "Chrome/150.0.0.0 Safari/537.36",
+
+      "Referer":
+        "https://yakkun.com/"
+    }
+  });
+
+  if (!response.ok) {
     throw new Error(
-      `${pokemonJsonPath} が見つかりません。`
+      `画像取得失敗: ${response.status} ${imageUrl}`
     );
   }
 
-  const oldPokemon = JSON.parse(
-    fs.readFileSync(
-      pokemonJsonPath,
-      "utf8"
-    )
+  const contentType =
+    response.headers.get(
+      "content-type"
+    ) || "";
+
+  const extension =
+    getExtensionFromMimeType(
+      contentType
+    ) ||
+    getExtensionFromUrl(imageUrl) ||
+    ".png";
+
+  const originalFileName =
+    getImageFileName(
+      imageUrl,
+      fallbackName
+    );
+
+  const originalExtension =
+    path.extname(originalFileName);
+
+  const fileName =
+    originalExtension
+      ? originalFileName
+      : `${originalFileName}${extension}`;
+
+  const outputPath =
+    path.resolve(
+      IMAGE_DIRECTORY,
+      fileName
+    );
+
+  const arrayBuffer =
+    await response.arrayBuffer();
+
+  fs.writeFileSync(
+    outputPath,
+    Buffer.from(arrayBuffer)
   );
+
+  return `images/${fileName}`;
+}
+
+// ==================================================
+// 画像を取得する
+// 個別失敗で全体を止めない
+// ==================================================
+
+async function safelyDownloadImage(
+  imageUrl,
+  fallbackName,
+  label
+) {
+  if (!imageUrl) {
+    return "";
+  }
+
+  try {
+    const imagePath =
+      await downloadImage(
+        imageUrl,
+        fallbackName
+      );
+
+    console.log(
+      `${label}保存: ${imagePath}`
+    );
+
+    return imagePath;
+  } catch (error) {
+    console.error(
+      `${label}取得失敗: ${error.message}`
+    );
+
+    return "";
+  }
+}
+
+// ==================================================
+// メイン処理
+// ==================================================
+
+async function scrape() {
+  if (
+    !fs.existsSync(
+      POKEMON_JSON_PATH
+    )
+  ) {
+    throw new Error(
+      `${POKEMON_JSON_PATH} が見つかりません。`
+    );
+  }
+
+  fs.mkdirSync(
+    IMAGE_DIRECTORY,
+    {
+      recursive: true
+    }
+  );
+
+  const oldPokemon =
+    JSON.parse(
+      fs.readFileSync(
+        POKEMON_JSON_PATH,
+        "utf8"
+      )
+    );
 
   const browser =
     await puppeteer.launch({
@@ -233,13 +443,12 @@ async function scrape() {
       timeout: 60000
     });
 
-    // ----------------------------------------------
-    // 氷タイプ一覧からURLを取得
-    // ----------------------------------------------
     const foundUrls =
       await page.evaluate(() => {
         return [
-          ...document.querySelectorAll("a")
+          ...document.querySelectorAll(
+            "a"
+          )
         ]
           .map(anchor => anchor.href)
           .filter(href =>
@@ -259,10 +468,14 @@ async function scrape() {
 
     const scrapedPokemon = [];
 
-    // ----------------------------------------------
-    // 各ポケモンを取得
-    // ----------------------------------------------
-    for (const discoveredUrl of uniqueUrls) {
+    for (
+      let index = 0;
+      index < uniqueUrls.length;
+      index += 1
+    ) {
+      const discoveredUrl =
+        uniqueUrls[index];
+
       const discoveredId =
         getIdFromUrl(discoveredUrl);
 
@@ -280,16 +493,17 @@ async function scrape() {
             pokemon.id === discoveredId
         );
 
-      const url = old
-        ? buildYakkunUrl(old)
-        : discoveredUrl;
+      const url =
+        old
+          ? buildYakkunUrl(old)
+          : discoveredUrl;
 
       const id =
         getIdFromUrl(url) ??
         discoveredId;
 
       console.log(
-        `\n開始: ${url}`
+        `\n[${index + 1}/${uniqueUrls.length}] 開始: ${url}`
       );
 
       try {
@@ -299,7 +513,6 @@ async function scrape() {
           timeout: 60000
         });
 
-        // 技テーブルが存在するまで待つ
         await page
           .waitForSelector(
             "#move_list",
@@ -313,11 +526,10 @@ async function scrape() {
             );
           });
 
+        await sleep(700);
+
         const scraped =
           await page.evaluate(() => {
-            // ======================================
-            // ページ内補助関数
-            // ======================================
             function normalizeText(
               value
             ) {
@@ -352,9 +564,25 @@ async function scrape() {
                 : null;
             }
 
-            // ======================================
-            // 基本情報
-            // ======================================
+            function getImageUrl(
+              image
+            ) {
+              return (
+                image?.currentSrc ||
+                image?.src ||
+                image?.getAttribute(
+                  "data-src"
+                ) ||
+                image?.getAttribute(
+                  "data-original"
+                ) ||
+                image?.getAttribute(
+                  "data-lazy-src"
+                ) ||
+                ""
+              );
+            }
+
             const baseTable =
               document.querySelector(
                 "table[summary='基本データ']"
@@ -383,25 +611,48 @@ async function scrape() {
                 )
                 .trim();
 
-            const imageElement =
+            const allImages = [
+              ...document.querySelectorAll(
+                "img"
+              )
+            ];
+
+            const normalImageElement =
+              allImages.find(image =>
+                normalizeText(
+                  image.alt
+                ).includes("通常色")
+              ) ??
+              allImages.find(image =>
+                /\/sprites\/home\/n\d+[a-z]?\.png/i.test(
+                  getImageUrl(image)
+                )
+              ) ??
               document.querySelector(
                 "img[src*='icon96']"
               );
 
-            const imageUrl =
-              imageElement?.src ?? "";
+            const shinyImageElement =
+              allImages.find(image =>
+                normalizeText(
+                  image.alt
+                ).includes("色違い")
+              ) ??
+              allImages.find(image =>
+                /\/sprites\/home\/n\d+[a-z]?_s\.png/i.test(
+                  getImageUrl(image)
+                )
+              );
 
-            const imageFileName =
-              imageUrl
-                ? imageUrl
-                  .split("/")
-                  .pop()
-                  .split("?")[0]
-                  .replace(
-                    ".gif",
-                    ".png"
-                  )
-                : "";
+            const imageUrl =
+              getImageUrl(
+                normalImageElement
+              );
+
+            const shinyImageUrl =
+              getImageUrl(
+                shinyImageElement
+              );
 
             const result = {
               name,
@@ -410,6 +661,7 @@ async function scrape() {
               height: "",
               weight: "",
               types: [],
+
               stats: {
                 hp: 0,
                 atk: 0,
@@ -418,19 +670,15 @@ async function scrape() {
                 spd: 0,
                 spe: 0
               },
+
               abilities: [],
               hiddenAbilities: [],
               moves: [],
+
               imageUrl,
-              imagePath:
-                imageFileName
-                  ? `images/${imageFileName}`
-                  : ""
+              shinyImageUrl
             };
 
-            // ======================================
-            // 基本表の行を解析
-            // ======================================
             if (baseTable) {
               const rows = [
                 ...baseTable.querySelectorAll(
@@ -505,11 +753,12 @@ async function scrape() {
                   )
                 ) {
                   result.types = [
-                    ...cells[1]
-                      ?.querySelectorAll(
-                        "img"
-                      ) ??
-                    []
+                    ...(
+                      cells[1]
+                        ?.querySelectorAll(
+                          "img"
+                        ) ?? []
+                    )
                   ]
                     .map(image =>
                       normalizeText(
@@ -547,9 +796,6 @@ async function scrape() {
                 "";
             }
 
-            // ======================================
-            // 種族値
-            // ======================================
             const allTableTexts = [
               ...document.querySelectorAll(
                 "table"
@@ -610,9 +856,6 @@ async function scrape() {
               }
             }
 
-            // ======================================
-            // 特性
-            // ======================================
             const abilityLinks = [
               ...document.querySelectorAll(
                 "a[href*='tokusei=']"
@@ -701,16 +944,6 @@ async function scrape() {
               }
             }
 
-            // ======================================
-            // チャンピオンズで覚える技
-            //
-            // HTML構造:
-            // move_main_row
-            // ↓
-            // move_detail_row
-            //
-            // past_move は過去作限定なので除外
-            // ======================================
             const moveTable =
               document.querySelector(
                 "#move_list"
@@ -728,7 +961,6 @@ async function scrape() {
                 const mainRow
                 of mainRows
               ) {
-                // 過去作限定技は除外
                 if (
                   mainRow.classList
                     .contains(
@@ -773,16 +1005,6 @@ async function scrape() {
                     )
                 ];
 
-                /*
-                 * detailCells:
-                 * 0 タイプ
-                 * 1 分類
-                 * 2 威力
-                 * 3 命中
-                 * 4 PP
-                 * 5 接触
-                 * 6 説明
-                 */
                 if (
                   detailCells.length < 4
                 ) {
@@ -826,9 +1048,6 @@ async function scrape() {
             return result;
           });
 
-        // ------------------------------------------
-        // 取得結果を整理
-        // ------------------------------------------
         scraped.abilities =
           uniqueAbilities(
             scraped.abilities
@@ -844,17 +1063,26 @@ async function scrape() {
             scraped.moves
           );
 
-        console.log(
-          `${scraped.name} 技取得数: ${scraped.moves.length}`
-        );
+        const urlToken =
+          String(url).match(
+            /\/(n\d+[a-z]?)/
+          )?.[1] ??
+          `pokemon-${id}`;
 
-        console.log(
-          scraped.moves.slice(0, 5)
-        );
+        const downloadedImagePath =
+          await safelyDownloadImage(
+            scraped.imageUrl,
+            urlToken,
+            `${scraped.name} 通常色`
+          );
 
-        // ------------------------------------------
-        // 既存データと統合
-        // ------------------------------------------
+        const downloadedShinyImagePath =
+          await safelyDownloadImage(
+            scraped.shinyImageUrl,
+            `${urlToken}_s`,
+            `${scraped.name} 色違い`
+          );
+
         const merged = {
           ...old,
 
@@ -893,20 +1121,33 @@ async function scrape() {
             "",
 
           imagePath:
-            getLocalImagePath(
-              id,
-              scraped.imagePath,
-              old?.imagePath
-            ),
-
-          // 既存サイトが image を使う場合も保持
-          image:
+            downloadedImagePath ||
+            old?.imagePath ||
             old?.image ||
-            getLocalImagePath(
-              id,
-              scraped.imagePath,
-              old?.imagePath
-            ),
+            "",
+
+          image:
+            downloadedImagePath ||
+            old?.image ||
+            old?.imagePath ||
+            "",
+
+          shinyImageUrl:
+            scraped.shinyImageUrl ||
+            old?.shinyImageUrl ||
+            "",
+
+          shinyImagePath:
+            downloadedShinyImagePath ||
+            old?.shinyImagePath ||
+            old?.shinyImage ||
+            "",
+
+          shinyImage:
+            downloadedShinyImagePath ||
+            old?.shinyImage ||
+            old?.shinyImagePath ||
+            "",
 
           types:
             scraped.types.length > 0
@@ -940,13 +1181,11 @@ async function scrape() {
               : old?.hiddenAbilities ||
               [],
 
-          // 今回取得した技を保存
           moves:
             scraped.moves.length > 0
               ? scraped.moves
               : old?.moves || [],
 
-          // 手動設定したおすすめ技セットは保持
           recommendedMovesets:
             old?.recommendedMovesets ||
             [],
@@ -963,6 +1202,14 @@ async function scrape() {
         console.log(
           `${merged.name} 更新完了`
         );
+
+        console.log(
+          `通常色: ${merged.imagePath || "なし"}`
+        );
+
+        console.log(
+          `色違い: ${merged.shinyImagePath || "なし"}`
+        );
       } catch (error) {
         console.error(
           `${url} 取得失敗: ${error.message}`
@@ -970,9 +1217,6 @@ async function scrape() {
       }
     }
 
-    // ----------------------------------------------
-    // JSONを保存
-    // ----------------------------------------------
     const mergedPokemon =
       uniqueById([
         ...oldPokemon,
@@ -980,7 +1224,7 @@ async function scrape() {
       ]);
 
     fs.writeFileSync(
-      pokemonJsonPath,
+      POKEMON_JSON_PATH,
       JSON.stringify(
         mergedPokemon,
         null,
@@ -991,6 +1235,10 @@ async function scrape() {
 
     console.log(
       "\nすべて完了しました。"
+    );
+
+    console.log(
+      `${scrapedPokemon.length}件を更新しました。`
     );
   } finally {
     await browser.close();
