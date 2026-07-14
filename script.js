@@ -93,6 +93,7 @@ function showPokemon(pokemon, card) {
       ${createAbilitiesHtml(pokemon)}
 
       ${createMemoHtml(pokemon)}
+            ${renderMoves(pokemon)}
     </div>
   `;
 
@@ -350,4 +351,51 @@ function getRank(value) {
 // 種族値からCSSクラス名を返す
 function getRankClass(value) {
   return `rank-${getRank(value).toLowerCase()}`;
+}
+
+function renderMoves(pokemon) {
+  const moves = pokemon.moves || [];
+
+  if (moves.length === 0) {
+    return `
+      <section class="moves-section">
+        <h3>覚える技</h3>
+        <p>技データはありません。</p>
+      </section>
+    `;
+  }
+
+  return `
+    <section class="moves-section">
+      <h3>覚える技（${moves.length}個）</h3>
+
+      <div class="moves-table-wrapper">
+        <table class="moves-table">
+          <thead>
+            <tr>
+              <th>技名</th>
+              <th>タイプ</th>
+              <th>分類</th>
+              <th>威力</th>
+              <th>命中</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            ${moves.map(move => `
+              <tr>
+                <td>${move.name}</td>
+<td class="type-${move.type}">
+    ${move.type}
+</td>
+                <td>${move.category}</td>
+                <td>${move.power ?? "—"}</td>
+                <td>${move.accuracy ?? "—"}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  `;
 }

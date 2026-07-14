@@ -531,3 +531,170 @@ h3 {
 
   font-size: 1.2rem;
 }
+
+.moves-section {
+  margin-top: 24px;
+}
+
+.moves-table-wrapper {
+  overflow-x: auto;
+}
+
+.moves-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.moves-table th,
+.moves-table td {
+  padding: 8px 10px;
+  border: 1px solid rgba(125, 211, 252, 0.35);
+  text-align: center;
+}
+
+.moves-table th {
+  background: rgba(8, 17, 31, 0.85);
+}
+
+.moves-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.moves-section {
+  margin-top: 30px;
+}
+
+.moves-table-wrapper {
+  overflow-x: auto;
+}
+
+.moves-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  background: rgba(10, 20, 40, 0.88);
+  backdrop-filter: blur(6px);
+
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.moves-table th {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+
+  padding: 10px;
+  text-align: center;
+}
+
+.moves-table td {
+  padding: 8px 10px;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.moves-table tr:hover td {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.type-ノーマル {
+  background: #A8A77A !important;
+  color: white;
+}
+
+.type-ほのお {
+  background: #EE8130 !important;
+  color: white;
+}
+
+.type-みず {
+  background: #6390F0 !important;
+  color: white;
+}
+
+.type-でんき {
+  background: #F7D02C !important;
+  color: black;
+}
+
+.type-くさ {
+  background: #7AC74C !important;
+  color: white;
+}
+
+.type-こおり {
+  background: #96D9D6 !important;
+  color: black;
+}
+
+.type-かくとう {
+  background: #C22E28 !important;
+  color: white;
+}
+
+.type-どく {
+  background: #A33EA1 !important;
+  color: white;
+}
+
+.type-じめん {
+  background: #E2BF65 !important;
+  color: black;
+}
+
+.type-ひこう {
+  background: #A98FF3 !important;
+  color: white;
+}
+
+.type-エスパー {
+  background: #F95587 !important;
+  color: white;
+}
+
+.type-むし {
+  background: #A6B91A !important;
+  color: white;
+}
+
+.type-いわ {
+  background: #B6A136 !important;
+  color: white;
+}
+
+.type-ゴースト {
+  background: #735797 !important;
+  color: white;
+}
+
+.type-ドラゴン {
+  background: #6F35FC !important;
+  color: white;
+}
+
+.type-あく {
+  background: #705746 !important;
+  color: white;
+}
+
+.type-はがね {
+  background: #B7B7CE !important;
+  color: black;
+}
+
+.type-フェアリー {
+  background: #D685AD !important;
+  color: white;
+}
+
+.moves-table td[class^="type-"] {
+  font-weight: bold;
+
+  border-radius: 20px;
+
+  width: 90px;
+}
