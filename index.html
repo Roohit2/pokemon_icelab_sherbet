@@ -5,50 +5,76 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Sherbet - 氷タイプ研究所</title>
+  <title>Sherbet</title>
 
-  <link rel="stylesheet" href="style.css">
-
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="card.css">
+  <link rel="stylesheet" href="detail.css">
+  <link rel="stylesheet" href="moves.css">
 </head>
 
 <body>
 
-  <div class="hero">
-    <h1 class="hero-title">
-      ❄ Sherbet ❄
-    </h1>
+  <header class="site-header">
+    <div class="site-header-inner">
 
-    <p class="hero-subtitle">
-      ポケモンチャンピオンズ 氷タイプ研究所
-    </p>
+      <h1 class="site-title">
+        <span class="title-snow">❄</span>
+        <span>SHERBET</span>
+        <span class="title-snow">❄</span>
+      </h1>
 
-    <p class="hero-description">
-      氷ポケモン愛好家のための対面/後出し性能、有利不利データベース
-    </p>
+      <p class="site-subtitle">
+        ポケモンチャンピオンズ 氷タイプ研究所
+      </p>
 
-    <hr class="ice-divider">
+      <p class="site-description">
+        氷ポケモン愛好家のための対面/後出し性能、有利不利データベース
+      </p>
 
-  </div>
+      <div class="header-line"></div>
 
-  <!-- <input id="search" placeholder="ポケモン名で検索"> -->
+      <div class="controls">
+        <button type="button" onclick="sortByHp()">
+          💗 HP順
+        </button>
 
-  <div class="filter-buttons">
+        <button type="button" onclick="sortByAtk()">
+          ⚔️ 攻撃順
+        </button>
 
-    <button onclick="sortByHp()">❤️ HP順</button>
-    <button onclick="sortByAtk()">⚔️ 攻撃順</button>
-    <button onclick="sortByDefense()">🛡️ 防御順</button>
-    <button onclick="sortBySpAtk()">🧙 特攻順</button>
-    <button onclick="sortBySpDefense()">🔮 特防順</button>
-    <button onclick="sortBySpeed()">💨 素早さ順</button>
-    <button onclick="showMegaOnly()">✨ メガシンカ</button>
-    <button onclick="displayPokemon(allPokemon)">❄️ 全表示</button>
+        <button type="button" onclick="sortByDefense()">
+          🛡️ 防御順
+        </button>
 
-  </div>
+        <button type="button" onclick="sortBySpAtk()">
+          🧙 特攻順
+        </button>
 
-  <div id="pokemon-list"></div>
+        <button type="button" onclick="sortBySpDefense()">
+          🔮 特防順
+        </button>
 
-  <div id="result"></div>
+        <button type="button" onclick="sortBySpeed()">
+          💨 素早さ順
+        </button>
+
+        <button type="button" onclick="showMegaOnly()">
+          ✨ メガシンカ
+        </button>
+
+        <button type="button" onclick="showAllPokemon()">
+          ❄️ 全表示
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <div id="pokemon-list"></div>
+    <div id="result"></div>
+  </main>
 
   <script src="script.js"></script>
 

@@ -1,0 +1,255 @@
+/* ==============================
+   技一覧
+============================== */
+
+.moves-section {
+  position: relative;
+  margin-top: 28px;
+}
+
+.moves-heading {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.moves-heading h3 {
+  flex: 1;
+}
+
+.moves-count {
+  flex: 0 0 auto;
+  margin: 0 0 16px;
+  color: #addff4;
+  font-size: 13px;
+}
+
+.moves-sort-help {
+  margin: -7px 0 12px;
+  color: #9ecde1;
+  font-size: 12px;
+}
+
+/* ==============================
+   テーブル
+============================== */
+
+.moves-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #53748a;
+  background: #071421;
+}
+
+.moves-table {
+  width: 100%;
+  min-width: 600px;
+  color: #eaf8ff;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.moves-table th,
+.moves-table td {
+  padding: 11px 12px;
+  text-align: center;
+  border-right: 1px solid #36556b;
+  border-bottom: 1px solid #36556b;
+}
+
+.moves-table th:last-child,
+.moves-table td:last-child {
+  border-right: none;
+}
+
+/* ==============================
+   ヘッダー
+============================== */
+
+.moves-table thead th {
+  padding: 0;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  background: #173d5d;
+}
+
+/* ソートボタン */
+
+.move-sort-button {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 8px;
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.move-sort-button:hover {
+  color: #ffffff;
+  background: #245b80;
+  box-shadow: none;
+  transform: none;
+}
+
+.move-sort-button:active {
+  background: #2c6b94;
+  transform: none;
+}
+
+/* ==============================
+   データ行
+============================== */
+
+.moves-table tbody tr {
+  background: #0c1d2d;
+}
+
+.moves-table tbody tr:nth-child(even) {
+  background: #10283f;
+}
+
+.moves-table tbody tr:hover {
+  background: #194665;
+}
+
+.moves-table td:first-child {
+  text-align: left;
+}
+
+/* ==============================
+   タイプ列
+============================== */
+
+.moves-table .move-type {
+  min-width: 90px;
+  padding: 7px 10px;
+  border: none;
+  border-right: 1px solid #36556b;
+  border-bottom: 1px solid #36556b;
+  border-radius: 0;
+}
+
+/* ==============================
+   分類
+============================== */
+
+.move-category {
+  width: 80px;
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 900;
+}
+
+/* ==============================
+   威力・命中
+============================== */
+
+.move-number {
+  width: 90px;
+  font-variant-numeric: tabular-nums;
+}
+
+.same-type-move {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.accuracy-100 {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+/* ==============================
+   分類記号
+============================== */
+
+.move-symbol-guide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 12px;
+  color: #bdeaff;
+  font-size: 13px;
+}
+
+.move-symbol-guide strong {
+  color: #ffffff;
+  font-size: 17px;
+}
+
+/* ==============================
+   技名絞り込み
+============================== */
+
+.moves-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 12px;
+  padding: 14px;
+  border: 1px solid #436880;
+  background: #0c2032;
+}
+
+.move-search-label {
+  display: grid;
+  flex: 1 1 300px;
+  gap: 6px;
+  color: #bdeaff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.move-search-input {
+  width: 100%;
+  height: 42px;
+  padding: 8px 12px;
+  color: #ffffff;
+  outline: none;
+  border: 1px solid #6aa8c9;
+  border-radius: 4px;
+  background: #071421;
+}
+
+.move-search-input::placeholder {
+  color: #7fa6ba;
+}
+
+.move-search-input:focus {
+  border-color: #bcecff;
+  box-shadow:
+    0 0 0 2px rgba(83, 196, 255, 0.22),
+    0 0 10px rgba(83, 196, 255, 0.35);
+}
+
+.move-search-clear {
+  min-height: 42px;
+  padding: 8px 15px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid #6aa8c9;
+  border-radius: 4px;
+  background: #173d5d;
+  box-shadow: none;
+}
+
+.move-search-clear:hover {
+  background: #245b80;
+  box-shadow: none;
+  transform: none;
+}
+
+.moves-empty {
+  padding: 28px 12px !important;
+  color: #bdeaff;
+  text-align: center !important;
+}

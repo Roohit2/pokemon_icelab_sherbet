@@ -1,0 +1,281 @@
+/* ==============================
+   基本設定
+============================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: #ffffff;
+  font-family:
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+  background:
+    linear-gradient(180deg,
+      #09192b 0%,
+      #102a43 55%,
+      #dff6ff 100%);
+  background-attachment: fixed;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+/* ==============================
+   ヘッダー
+============================== */
+
+.site-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% -20%,
+      rgba(104, 201, 255, 0.3),
+      transparent 47%),
+    linear-gradient(180deg,
+      #10263b 0%,
+      #09192b 100%);
+}
+
+.site-header-inner {
+  width: min(1200px, calc(100% - 30px));
+  margin: 0 auto;
+  padding: 26px 0 48px;
+  text-align: center;
+}
+
+/* ==============================
+   タイトル
+============================== */
+
+.site-title {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: #eefcff;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: clamp(48px, 8vw, 82px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-shadow:
+    0 0 5px #ffffff,
+    0 0 12px #bcecff,
+    0 0 25px #60c8ff,
+    0 0 45px rgba(84, 190, 255, 0.85);
+}
+
+.title-snow {
+  color: #e6faff;
+  font-family:
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+  font-size: 0.8em;
+  letter-spacing: 0;
+}
+
+/* ==============================
+   説明文
+============================== */
+
+.site-subtitle {
+  margin: 30px auto 0;
+  color: #79e1ff;
+  font-size: clamp(18px, 2.5vw, 25px);
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 0 8px rgba(73, 204, 255, 0.55);
+}
+
+.site-description {
+  margin: 20px auto 0;
+  color: #e0f7ff;
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* ==============================
+   発光ライン
+============================== */
+
+.header-line {
+  width: min(590px, 80%);
+  height: 2px;
+  margin: 29px auto 28px;
+  background:
+    linear-gradient(90deg,
+      transparent,
+      #77d8ff,
+      #ffffff,
+      #77d8ff,
+      transparent);
+  box-shadow:
+    0 0 5px #8bdfff,
+    0 0 14px rgba(83, 196, 255, 0.65);
+}
+
+/* ==============================
+   操作ボタン
+============================== */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+
+.controls button {
+  flex: 0 0 auto;
+  padding: 10px 19px;
+  color: #123047;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid #d8f5ff;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg,
+      #f3fcff 0%,
+      #c7efff 53%,
+      #8acbe8 100%);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    0 3px 8px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.controls button:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(119, 216, 255, 0.75);
+  transform: translateY(-2px);
+}
+
+.controls button:active {
+  transform: translateY(0);
+}
+
+/* ==============================
+   メイン
+============================== */
+
+main {
+  width: min(1200px, calc(100% - 30px));
+  margin: 0 auto;
+  padding: 50px 0 80px;
+}
+
+/* ==============================
+   共通見出し
+============================== */
+
+h3 {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  color: #ffffff;
+  font-size: 18px;
+  border-left: 5px solid #7dd3fc;
+  background: #10283f;
+}
+
+/* ==============================
+   メッセージ
+============================== */
+
+.error-message,
+.empty-message,
+.no-data {
+  padding: 18px;
+  color: #ffffff;
+  text-align: center;
+  border: 1px solid #52748a;
+  background: #10283f;
+}
+
+.error-message {
+  border-color: #ef4444;
+  background: #521b1b;
+}
+
+/* ==============================
+   スマートフォン
+============================== */
+
+@media (max-width: 700px) {
+  .site-header-inner {
+    width: min(100% - 20px, 1200px);
+    padding: 24px 0 35px;
+  }
+
+  .site-title {
+    gap: 10px;
+    font-size: clamp(35px, 11vw, 58px);
+    letter-spacing: 0.05em;
+  }
+
+  .site-subtitle {
+    margin-top: 22px;
+  }
+
+  .header-line {
+    margin: 23px auto;
+  }
+
+  .controls {
+    gap: 8px;
+  }
+
+  .controls button {
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+
+  main {
+    width: min(100% - 20px, 1200px);
+    padding-top: 30px;
+  }
+}
